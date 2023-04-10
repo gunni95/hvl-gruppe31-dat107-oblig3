@@ -8,11 +8,11 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
-public class AnsattCrudHjelper implements AnsattCrudInterface {
+public class AnsattDAO implements AnsattDAOInterface {
 
 	private EntityManagerFactory emf;
 	
-	public AnsattCrudHjelper() {
+	public AnsattDAO() {
 		emf = Persistence.createEntityManagerFactory("ansattPersistenceUnit");
 	}
 	

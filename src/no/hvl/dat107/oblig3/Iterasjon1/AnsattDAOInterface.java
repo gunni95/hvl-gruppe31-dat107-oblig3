@@ -2,7 +2,7 @@ package no.hvl.dat107.oblig3.Iterasjon1;
 
 import java.util.List;
 
-public interface AnsattCrudInterface {
+public interface AnsattDAOInterface {
 	
 	/** Create - Opprette ny ansatt-rad i databasen */
 	void lagreAnsatt(Ansatt a);	

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class main {
 	
-	private static AnsattCrudInterface crudHjelper = new AnsattCrudHjelper();
+	private static AnsattDAOInterface crudHjelper = new AnsattDAO();
 	
 	public static void main(String[] args) {
 		
