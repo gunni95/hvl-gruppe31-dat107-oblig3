@@ -1,7 +1,6 @@
-package Iterasjon1;
+package no.hvl.dat107.oblig3.Iterasjon1;
 
 import java.util.List;
-import java.util.Map;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
