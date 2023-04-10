@@ -1,4 +1,4 @@
-package Iterasjon1;
+package no.hvl.dat107.oblig3.Iterasjon1;
 
 import java.util.List;
 
