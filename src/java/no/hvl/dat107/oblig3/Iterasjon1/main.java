@@ -1,5 +1,9 @@
 package no.hvl.dat107.oblig3.Iterasjon1;
 
+import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.Ansatt;
+import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattDAO;
+import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattDAOInterface;
+
 import java.util.List;
 import java.util.Scanner;
 
