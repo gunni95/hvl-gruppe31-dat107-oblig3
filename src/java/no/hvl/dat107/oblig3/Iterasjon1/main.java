@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class main {
-	
+
 	private static final AnsattDAOInterface DAO = new AnsattDAO();
-	
+	private static Integer lastId = DAO.getLastId();
 	public static void main(String[] args) {
 		
 		skrivUt("Start.");
 		
-		DAO.lagreAnsatt(new Ansatt("Jan", "Jan", "Banan", "2022-11-11", "Bilmekaniker", 44000));
+		DAO.lagreAnsatt(new Ansatt(lastId, "Jan", "Jan", "Banan", "2022-11-11", "Bilmekaniker", 44000));
 		skrivUt("Lagt til Jan.");
 		
 		DAO.oppdaterAnsatt(0004, null, null, "Heisekran", null, 0);
@@ -24,7 +24,7 @@ public class main {
 		DAO.slettAnsatt(0001);
 		skrivUt("Slettet ansatt 0001.");
 		
-		DAO.lagreAnsatt(new Ansatt("Don", "Don", "Duck", "2022-01-01", "Kokk", 40000));
+		DAO.lagreAnsatt(new Ansatt(lastId, "Don", "Don", "Duck", "2022-01-01", "Kokk", 40000));
 		DAO.slettAnsatt(0004);
 		skrivUt("Tilbakestillt database.");
 
@@ -43,27 +43,27 @@ public class main {
 		String valg = input.nextLine();
 
 		switch (valg){
-			case "a":
+			case "a": // a) Søk ansatt med id
 				System.out.print("Skriv inn id:");
 				sokId = input.nextInt();
 				System.out.println(DAO.finnAnsattMedId(sokId).toString());
 
 				break;
-			case "b":
+			case "b": // b) Søk ansatt med brukernavn
 				System.out.print("Skriv inn brukernavn:");
 				sokBrukernavn = input.nextLine();
 				System.out.println(DAO.finnAnsattMedBrukernavn(sokBrukernavn).toString());
 
 				break;
-			case "c":
+			case "c": // c) Liste med ansatt
 				DAO.hentAlleAnsatte();
 
 				break;
-			case "d":
+			case "d": // d) Oppdatere ansatt
 
 
 				break;
-			case "e":
+			case "e": // e) Legg til ny ansatt
 
 
 				break;
