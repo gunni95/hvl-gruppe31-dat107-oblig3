@@ -34,6 +34,18 @@ public class AnsattDAO implements AnsattDAOInterface {
 			em.close();
 		}
 	}
+
+	@Override
+	public Integer getLastId() {
+		EntityManager em = emf.createEntityManager();
+		try {
+
+			TypedQuery<Ansatt> query = em.createNamedQuery("hentId", Ansatt.class);
+			return query.getMaxResults();
+		} finally {
+			em.close();
+		}
+	}
 	
 	@Override
 	public Ansatt finnAnsattMedId(int id) {

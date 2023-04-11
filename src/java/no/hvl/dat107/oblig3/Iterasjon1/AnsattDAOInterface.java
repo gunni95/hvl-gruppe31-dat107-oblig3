@@ -15,6 +15,8 @@ public interface AnsattDAOInterface {
 
 	/** Read2 - Hente ut data fra databasen. Alle. */
 	List<Ansatt> hentAlleAnsatte();
+
+	Integer getLastId();
 	
 	/** Read3 - Hente ut data fra databasen. Named Query. */
 	List<Ansatt> hentAlleAnsatteNQ();
