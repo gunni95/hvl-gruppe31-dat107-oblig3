@@ -8,8 +8,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(schema = "ansatte")
 @NamedQuery(name = "hentAlleAnsatte", query = "SELECT a FROM Ansatt as a order by a.id")
+@NamedQuery(name = "GetLastId", query = "SELECT COUNT(id) FROM Ansatt id")
 public class Ansatt {
-	
+	static Integer lastId = 0001;
 	@Id		private Integer id;
 	private String Brukernavn;
 	private String Fornavn;
@@ -22,14 +23,15 @@ public class Ansatt {
 		
 	}
 	
-	public Ansatt(Integer id, String Brukernavn, String Fornavn, String Etternavn, String AnsettelsesDato, String Stilling, Integer MaanedsLonn) {
-		this.id = id;
+	public Ansatt(String Brukernavn, String Fornavn, String Etternavn, String AnsettelsesDato, String Stilling, Integer MaanedsLonn) {
+		this.id = lastId + 1;
 		this.Brukernavn = Brukernavn;
 		this.Fornavn = Fornavn;
 		this.Etternavn = Etternavn;
 		this.AnsettelsesDato = AnsettelsesDato;
 		this.Stilling = Stilling;
 		this.MaanedsLonn = MaanedsLonn;
+		lastId++;
 	}
 	
 	public Integer getId() {
