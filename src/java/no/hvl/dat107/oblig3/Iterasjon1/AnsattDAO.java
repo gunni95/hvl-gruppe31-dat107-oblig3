@@ -36,12 +36,24 @@ public class AnsattDAO implements AnsattDAOInterface {
 	}
 	
 	@Override
-	public Ansatt hentAnsatt(int id) {
+	public Ansatt finnAnsattMedId(int id) {
 
 		EntityManager em = emf.createEntityManager();
 
 		try {
 			return em.find(Ansatt.class, id); //Henter ut på primærnøkkel
+		} finally {
+			em.close();
+		}
+	}
+
+	@Override
+	public Ansatt finnAnsattMedBrukernavn(String brukernavn) {
+
+		EntityManager em = emf.createEntityManager();
+
+		try {
+			return em.find(Ansatt.class, brukernavn); //Henter ut på primærnøkkel
 		} finally {
 			em.close();
 		}

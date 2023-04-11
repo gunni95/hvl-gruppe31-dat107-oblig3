@@ -8,8 +8,11 @@ public interface AnsattDAOInterface {
 	void lagreAnsatt(Ansatt a);	
 	
 	/** Read1 - Hente ut data fra databasen. En enkelt. */
-	Ansatt hentAnsatt(int id);
-	
+	Ansatt finnAnsattMedId(int id);
+
+	/** Read1.5 - - Hente ut data fra databasen. En enkel. */
+	Ansatt finnAnsattMedBrukernavn(String brukernavn);
+
 	/** Read2 - Hente ut data fra databasen. Alle. */
 	List<Ansatt> hentAlleAnsatte();
 	
