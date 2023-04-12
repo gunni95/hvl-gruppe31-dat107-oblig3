@@ -22,6 +22,7 @@ public class Ansatt {
 	}
 
 	public Ansatt(String brukernavn, String fornavn, String etternavn, String ansettelsesDato, Integer avdeling, String stilling, Integer maanedsLonn) {
+		this.id = id;
 		this.brukernavn = brukernavn;
 		this.fornavn = fornavn;
 		this.etternavn = etternavn;
