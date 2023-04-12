@@ -1,4 +1,4 @@
-package no.hvl.dat107.oblig3.Iterasjon1.Avdeling;
+package no.hvl.dat107.oblig3.Avdeling;
 
 import java.util.List;
 

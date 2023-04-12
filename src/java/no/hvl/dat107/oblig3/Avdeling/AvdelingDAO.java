@@ -1,6 +1,7 @@
-package no.hvl.dat107.oblig3.Iterasjon1.Avdeling;
+package no.hvl.dat107.oblig3.Avdeling;
 
 import jakarta.persistence.*;
+import no.hvl.dat107.oblig3.Ansatt.Ansatt;
 
 import java.util.List;
 
@@ -44,7 +45,9 @@ public class AvdelingDAO implements AvdelingDAOInterface {
         EntityManager em = emf.createEntityManager();
 
         try {
-            return em.find(Avdeling.class, avdelingNavn); //Henter ut på primærnøkkel
+            return em.createQuery(
+                            "SELECT a from Avdeling a WHERE a.navn = :avdelingNavn", Avdeling.class).
+                    setParameter("avdelingNavn", avdelingNavn).getSingleResult(); //Henter ut på primærnøkkel
         } finally {
             em.close();
         }
