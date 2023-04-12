@@ -1,10 +1,13 @@
 package no.hvl.dat107.oblig3;
 
+import no.hvl.dat107.oblig3.Ansatt.Ansatt;
 import no.hvl.dat107.oblig3.Ansatt.AnsattDAO;
 import no.hvl.dat107.oblig3.Ansatt.AnsattDAOInterface;
 import no.hvl.dat107.oblig3.Ansatt.AnsattTekstgrensesnitt;
+import no.hvl.dat107.oblig3.Avdeling.Avdeling;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingDAO;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Klient {
@@ -18,7 +21,7 @@ public class Klient {
 
 		while (!done) {
 			Scanner input = new Scanner(System.in);
-			String funksjonTxt = "Velg fuknsjon\n a) Søk ansatt med id\n b) Søk ansatt med brukernavn\n c) Liste med ansatte\n d) Oppdatere ansatt\n e) Legg til ny ansatt \n 0) Avslutt";
+			String funksjonTxt = "Velg fuknsjon\n a) Søk ansatt med id\n b) Søk ansatt med brukernavn\n c) Liste med ansatte\n d) Oppdatere ansatt\n e) Legg til ny ansatt\n f) Finn avdeling \n 0) Avslutt";
 
 			System.out.println(funksjonTxt);
 			System.out.print("Ditt valg: ");
@@ -42,6 +45,9 @@ public class Klient {
 					break;
 				case "e": // e) Legg til ny ansatt
 					System.out.println("Ny ansatt: " + AnsattTekstgrensesnitt.LesInnNyAnsatt(avDAO, anDAO));
+					break;
+				case "f": // f) Finn avdeling
+					System.out.println("Avdeling: " + avDAO.finnAvdelingMedId(input.nextInt()).getAvdelingNavn());
 					break;
 			}
 			input.close();
