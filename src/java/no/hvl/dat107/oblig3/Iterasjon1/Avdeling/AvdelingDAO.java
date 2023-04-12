@@ -1,12 +1,11 @@
 package no.hvl.dat107.oblig3.Iterasjon1.Avdeling;
 
 import jakarta.persistence.*;
-import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.Ansatt;
 
 import java.util.List;
 
 public class AvdelingDAO implements AvdelingDAOInterface {
-    private EntityManagerFactory emf;
+    private final EntityManagerFactory emf;
     public AvdelingDAO() {
         emf = Persistence.createEntityManagerFactory("ansattPersistenceUnit");
     }
