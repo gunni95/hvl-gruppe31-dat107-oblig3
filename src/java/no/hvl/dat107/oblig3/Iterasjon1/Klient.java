@@ -8,7 +8,7 @@ import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattTekstgrensesnitt;
 import java.util.List;
 import java.util.Scanner;
 
-public class main {
+public class Klient {
 
 	private static final AnsattDAOInterface DAO = new AnsattDAO();
 	public static void main(String[] args) {
