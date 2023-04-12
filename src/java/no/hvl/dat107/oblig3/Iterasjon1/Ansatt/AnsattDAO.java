@@ -10,10 +10,10 @@ import jakarta.persistence.TypedQuery;
 
 public class AnsattDAO implements AnsattDAOInterface {
 
-	private EntityManagerFactory emf;
+	private final EntityManagerFactory emf;
 	
 	public AnsattDAO() {
-		emf = Persistence.createEntityManagerFactory("ansattPersistenceUnit");
+		this.emf = Persistence.createEntityManagerFactory("ansattPersistenceUnit");
 	}
 	
 	@Override
@@ -134,7 +134,7 @@ public class AnsattDAO implements AnsattDAOInterface {
 			tx.begin();
 
 			Ansatt a = em.find(Ansatt.class, id); //Finne rad som skal oppdateres
-			if(nyStilling != null && nyStilling != "0") {
+			if(nyStilling != null && !nyStilling.equals("0")) {
 				a.setStilling(nyStilling);
 			}
 			tx.commit();
