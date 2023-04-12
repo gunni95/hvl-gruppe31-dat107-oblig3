@@ -20,7 +20,10 @@ public interface AnsattDAOInterface {
 	List<Ansatt> hentAlleAnsatteNQ();
 	
 	/** Update - Oppdatere en ansatt-rad i databasen */
-	void oppdaterAnsatt(int id, String nyttBrukernavn, String nyttFornavn, String nyttEtternavn, String nyStilling, int nyMaanedsLonn);
+	void oppdaterAnsatt(int id, String nyttBrukernavn, String nyttFornavn, String nyttEtternavn, Integer avdeling, String nyStilling, Integer nyMaanedsLonn);
+
+	/** Update - Oppdatere stilling i en ansatt-rad i databasen */
+	void oppdaterAvdeling(int ansattId, int avdelingId);
 
 	/** Update - Oppdatere stilling i en ansatt-rad i databasen */
 	void oppdaterStilling(int id, String nyStilling);

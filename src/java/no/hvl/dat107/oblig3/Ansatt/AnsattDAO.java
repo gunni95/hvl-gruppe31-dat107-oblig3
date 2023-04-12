@@ -87,7 +87,7 @@ public class AnsattDAO implements AnsattDAOInterface {
 	}
 	
 	@Override
-	public void oppdaterAnsatt(int id, String Brukernavn, String Fornavn, String Etternavn, String Stilling, int MaanedsLonn) {
+	public void oppdaterAnsatt(int id, String brukernavn, String fornavn, String etternavn, Integer avdeling, String stilling, Integer maanedsLonn) {
 
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -96,20 +96,23 @@ public class AnsattDAO implements AnsattDAOInterface {
 			tx.begin();
 			
 			Ansatt a = em.find(Ansatt.class, id); //Finne rad som skal oppdateres
-			if(Brukernavn != null) {
-				a.setBrukernavn(Brukernavn);
+			if(brukernavn != null) {
+				a.setBrukernavn(brukernavn);
 			}
-			if(Fornavn != null) {
-				a.setFornavn(Fornavn);
+			if(fornavn != null) {
+				a.setFornavn(fornavn);
 			}
-			if(Etternavn != null) {
-				a.setEtternavn(Etternavn);
+			if(etternavn != null) {
+				a.setEtternavn(etternavn);
 			}
-			if(Stilling != null) {
-				a.setStilling(Stilling);
+			if (avdeling != null) {
+				a.setAvdeling(avdeling);
 			}
-			if(MaanedsLonn != 0) {
-				a.setMaanedsLonn(MaanedsLonn);
+			if(stilling != null) {
+				a.setStilling(stilling);
+			}
+			if(maanedsLonn != 0) {
+				a.setMaanedsLonn(maanedsLonn);
 			}
 		
 			tx.commit();
@@ -181,6 +184,25 @@ public class AnsattDAO implements AnsattDAOInterface {
 			tx.commit();
 		
 		} catch (Throwable e) {
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+	}
+
+	@Override
+	public void oppdaterAvdeling(int ansattId, int avdelingId) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		try{
+			tx.begin();
+
+			Ansatt a = em.find(Ansatt.class, ansattId); //Finne rad som skal oppdateres
+			a.setAvdeling(avdelingId);
+			tx.commit();
+		} catch (Throwable e){
 			e.printStackTrace();
 			tx.rollback();
 		} finally {

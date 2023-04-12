@@ -95,23 +95,45 @@ public class AnsattTekstgrensesnitt {
 
     public static Ansatt oppdaterAnsatt(AnsattDAOInterface DAO) {
         Scanner input = new Scanner(System.in);
-        int sokId = safeRead(() -> {
+        Integer sokId = safeRead(() -> {
             System.out.print("Skriv id på ansatt du vil oppdatere: ");
-            return Integer.parseInt(input.nextLine());
+            String res = input.nextLine();
+            if (res.length() == 0) {
+                return null;
+            }
+            return Integer.parseInt(res);
         }, "Ikke gyldig Ansatt id");
+
+        Integer nyAvdeling = safeRead(() -> {
+            System.out.print("Skriv inn ny avdeling: ");
+            String res = input.nextLine();
+            if (res.length() == 0) {
+                return null;
+            }
+            return Integer.parseInt(res);
+        }, "Ikke gyldig Avdeling");
 
         String nyStilling = safeRead(() -> {
             System.out.print("Skriv inn ny stilling: ");
-            return input.nextLine();
+            String res = input.nextLine();
+            if (res.length() == 0) {
+                return null;
+            }
+            return res;
         }, "Ikke gyldig stilling");
 
         int nyLonn = safeRead(() -> {
             System.out.println("Skriv inn ny lønn:");
-            return Integer.parseInt(input.nextLine());
+            String res = input.nextLine();
+            if (res.length() == 0) {
+                return null;
+            }
+            return Integer.parseInt(res);
         }, "Ikke gyldig lønn");
 
         input.close();
 
+        DAO.oppdaterAvdeling(sokId, nyAvdeling);
         DAO.oppdaterStilling(sokId, nyStilling);
         DAO.oppdaterLonn(sokId, nyLonn);
         return DAO.finnAnsattMedId(sokId);

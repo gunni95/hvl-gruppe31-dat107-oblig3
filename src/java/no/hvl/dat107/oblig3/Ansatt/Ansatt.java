@@ -58,6 +58,12 @@ public class Ansatt {
 	public void setAnsettelsesDato(String ansettelsesDato) {
 		this.ansettelsesDato = ansettelsesDato;
 	}
+	public Integer getAvdeling() {
+		return this.avdeling;
+	}
+	public void setAvdeling(Integer avdeling) {
+		this.avdeling = avdeling;
+	}
 	public String getStilling() {
 		return stilling;
 	}
