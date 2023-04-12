@@ -9,7 +9,7 @@ public class AnsattTekstgrensesnitt {
         T response = null;
         while (!valid) {
             try {
-                response = (T) operation;
+                response = operation.call();
                 valid = true;
             } catch (Exception e) {
                 System.out.println(errorMessage + ", " + e.getMessage());
@@ -28,6 +28,7 @@ public class AnsattTekstgrensesnitt {
         Integer maanedslonn;
 
         Scanner input = new Scanner(System.in);
+
         brukernavn = safeRead(() -> {
             System.out.println("Brukernavn: ");
             String res = input.nextLine();
@@ -36,22 +37,26 @@ public class AnsattTekstgrensesnitt {
             }
             return res;
         }, "Ikke gyldig brukernavn");
+
         fornavn = safeRead(() -> {
             System.out.println("Fornavn: ");
             return input.nextLine();
         }, "Ikke gyldig fornavn");
+
         etternavn = safeRead(() -> {
             System.out.println("Etternavn: ");
             return input.nextLine();
         }, "Ikke gyldig etternavn");
+
         ansettelsesdato = safeRead(() -> {
             System.out.println("dato (dd.mm.yyyy): ");
             String res = input.nextLine();
-            String[] dateSections = res.split("-|.| ");
+            String[] dateSections = res.split("\\-|\\.| ");
             int day = Integer.parseInt(dateSections[0]);
             int month = Integer.parseInt(dateSections[1]);
             int year = Integer.parseInt(dateSections[2]);
-            if (day < 31 || (month >= 1 && month <= 12) || Integer.toString(year).length() == 0) {
+            System.out.println(day + ", " + month + ", " + year);
+            if (day > 31 || day < 1 || month < 1 || month >= 12 || Integer.toString(year).length() == 0) {
                 throw new Exception("Ikke gyldig datoformat");
             }
             String formatedDay = String.format("%2d", day);
@@ -60,10 +65,12 @@ public class AnsattTekstgrensesnitt {
 
             return formatedDay + "." + formatedMonth + "." + formatedYear;
         }, "Ikke gyldig dato");
+
         stilling = safeRead(() -> {
             System.out.println("Stilling: ");
             return input.nextLine();
         }, "Ikke gyldig stilling");
+
         maanedslonn = safeRead(() -> {
             System.out.println("Månedslønn: ");
             return Integer.parseInt(input.nextLine());
@@ -79,14 +86,17 @@ public class AnsattTekstgrensesnitt {
             System.out.println("Skriv id på ansatt du vil oppdatere:");
             return Integer.parseInt(input.nextLine());
         }, "Ikke gyldig Ansatt id");
+
         String nyStilling = safeRead(() -> {
             System.out.println("Skriv inn ny stilling:");
             return input.nextLine();
         }, "Ikke gyldig stilling");
+
         int nyLonn = safeRead(() -> {
             System.out.println("Skriv inn ny lønn:");
             return Integer.parseInt(input.nextLine());
         }, "Ikke gyldig lønn");
+
         input.close();
 
         DAO.oppdaterStilling(sokId, nyStilling);
@@ -94,16 +104,30 @@ public class AnsattTekstgrensesnitt {
         return DAO.finnAnsattMedId(sokId);
     }
 
-    public static Ansatt finnAnsatt(AnsattDAOInterface DAO) {
+    public static Ansatt finnAnsattMedBrukernavn(AnsattDAOInterface DAO) {
         Scanner input = new Scanner(System.in);
 
         String sokBrukernavn = safeRead(() -> {
             System.out.print("Skriv inn brukernavn:");
             return input.nextLine();
         }, "Ikke gyldig søkeverdi");
+
         input.close();
 
         return DAO.finnAnsattMedBrukernavn(sokBrukernavn);
+    }
+
+    public static Ansatt finnAnsattMedId(AnsattDAOInterface DAO) {
+        Scanner input = new Scanner(System.in);
+
+        int brukerId = safeRead(() -> {
+            System.out.print("Skriv inn id:");
+            return Integer.parseInt(input.nextLine());
+        }, "Ikke gyldig søkeverdi");
+
+        input.close();
+
+        return DAO.finnAnsattMedId(brukerId);
     }
 
     public static List<Ansatt> listAnsatte(AnsattDAOInterface DAO) {

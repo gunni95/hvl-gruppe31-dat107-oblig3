@@ -2,11 +2,7 @@ package no.hvl.dat107.oblig3.Iterasjon1.Ansatt;
 
 import java.util.List;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 
 public class AnsattDAO implements AnsattDAOInterface {
 
@@ -56,6 +52,8 @@ public class AnsattDAO implements AnsattDAOInterface {
 			return em.createQuery(
 							"SELECT a from Ansatt a WHERE a.brukernavn = :brukernavn", Ansatt.class).
 					setParameter("brukernavn", brukernavn).getSingleResult(); //Henter ut på primærnøkkel
+		} catch (NoResultException e) {
+			return null;
 		} finally {
 			em.close();
 		}

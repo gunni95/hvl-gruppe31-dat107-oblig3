@@ -24,10 +24,10 @@ public class Klient {
 
 		switch (valg){
 			case "a": // a) Søk ansatt med id
-				AnsattTekstgrensesnitt.finnAnsatt(DAO);
+				System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsattMedId(DAO));
 				break;
 			case "b": // b) Søk ansatt med brukernavn
-				System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsatt(DAO));
+				System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsattMedBrukernavn(DAO));
 				break;
 			case "c": // c) Liste med ansatt
 				System.out.println("Alle ansatte: " + AnsattTekstgrensesnitt.listAnsatte(DAO));
