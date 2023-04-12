@@ -1,13 +1,15 @@
 package no.hvl.dat107.oblig3.Iterasjon1.Ansatt;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(schema = "oblig3", name="ansatt")
 @NamedQuery(name = "hentAlleAnsatte", query = "SELECT a FROM Ansatt as a order by a.id")
 public class Ansatt {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String brukernavn;
 	private String fornavn;
