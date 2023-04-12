@@ -1,4 +1,5 @@
 package no.hvl.dat107.oblig3.Ansatt;
+import no.hvl.dat107.oblig3.Avdeling.Avdeling;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface;
 
 import java.util.List;
@@ -105,23 +106,29 @@ public class AnsattTekstgrensesnitt {
             return Integer.parseInt(res);
         }, "Ikke gyldig Ansatt id");
 
-        Integer nyAvdeling = safeRead(() -> {
-            System.out.print("Skriv inn ny avdeling: ");
-            String res = input.nextLine();
-            if (res.length() == 0) {
-                return null;
-            }
-            return Integer.parseInt(res);
-        }, "Ikke gyldig Avdeling");
+        boolean kanEndreStilling = false; //!anDAO.erSjef(sokId);
+        Integer nyAvdeling = null;
+        String nyStilling = null;
 
-        String nyStilling = safeRead(() -> {
-            System.out.print("Skriv inn ny stilling: ");
-            String res = input.nextLine();
-            if (res.length() == 0) {
-                return null;
-            }
-            return res;
-        }, "Ikke gyldig stilling");
+        if (kanEndreStilling) {
+            nyAvdeling = safeRead(() -> {
+                System.out.print("Skriv inn ny avdeling: ");
+                String res = input.nextLine();
+                if (res.length() == 0) {
+                    return null;
+                }
+                return Integer.parseInt(res);
+            }, "Ikke gyldig Avdeling");
+
+            nyStilling = safeRead(() -> {
+                System.out.print("Skriv inn ny stilling: ");
+                String res = input.nextLine();
+                if (res.length() == 0) {
+                    return null;
+                }
+                return res;
+            }, "Ikke gyldig stilling");
+        }
 
         Integer nyLonn = safeRead(() -> {
             System.out.println("Skriv inn ny lønn:");
