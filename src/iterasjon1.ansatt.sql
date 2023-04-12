@@ -1,6 +1,6 @@
 DROP SCHEMA IF EXISTS ansatte CASCADE;
 
-CREATE SCHEMA ansatte;
+CREATE SCHEMA oblig3;
 SET search_path TO ansatte;
 
 CREATE TABLE ansatt(

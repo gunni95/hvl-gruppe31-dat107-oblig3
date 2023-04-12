@@ -7,7 +7,7 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(schema = "avdelinger")
+@Table(schema = "oblig3", name = "avdeling")
 @NamedQuery(name = "hentAlleAvdelinger", query = "SELECT a FROM Avdeling as a order by a.id")
 public class Avdeling {
     @Id
