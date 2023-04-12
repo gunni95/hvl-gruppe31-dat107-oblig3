@@ -44,6 +44,7 @@ public class Klient {
 					System.out.println("Ny ansatt: " + AnsattTekstgrensesnitt.LesInnNyAnsatt(avDAO, anDAO));
 					break;
 			}
+			input.close();
 		}
 	}
 }
