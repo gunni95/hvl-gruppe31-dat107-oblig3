@@ -8,8 +8,6 @@ import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattTekstgrensesnitt;
 import java.util.List;
 import java.util.Scanner;
 
-import static no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattTekstgrensesnitt.skrivUt;
-
 public class main {
 
 	private static final AnsattDAOInterface DAO = new AnsattDAO();
