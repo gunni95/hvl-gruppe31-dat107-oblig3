@@ -55,12 +55,19 @@ public class main {
 
 				break;
 			case "c": // c) Liste med ansatt
-				DAO.hentAlleAnsatte();
+				skrivUt("Alle ansatte:");
 
 				break;
 			case "d": // d) Oppdatere ansatt
-
-
+				System.out.println("Skriv id på ansatt du vil oppdatere:");
+				sokId = input.nextInt();
+				System.out.println("Skriv inn ny stilling og/eller ny lønn");
+				System.out.println("Skriv inn ny stilling:");
+				String nyStilling = input.nextLine();
+				System.out.println("Skriv inn ny lønn:");
+				int nyLonn = input.nextInt();
+				DAO.oppdaterStilling(sokId, nyStilling);
+				DAO.oppdaterLonn(sokId, nyLonn);
 				break;
 			case "e": // e) Legg til ny ansatt
 

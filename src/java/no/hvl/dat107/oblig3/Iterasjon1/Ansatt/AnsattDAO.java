@@ -123,6 +123,50 @@ public class AnsattDAO implements AnsattDAOInterface {
 	}
 
 	@Override
+	public void oppdaterStilling(int id, String nyStilling){
+
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		try{
+			tx.begin();
+
+			Ansatt a = em.find(Ansatt.class, id); //Finne rad som skal oppdateres
+			if(nyStilling != null && nyStilling != "0") {
+				a.setStilling(nyStilling);
+			}
+			tx.commit();
+		} catch (Throwable e){
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+	}
+
+	@Override
+	public void oppdaterLonn(int id, int nyLonn){
+
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		try{
+			tx.begin();
+
+			Ansatt a = em.find(Ansatt.class, id); //Finne rad som skal oppdateres
+			if(nyLonn != 0) {
+				a.setMaanedsLonn(nyLonn);
+			}
+			tx.commit();
+		} catch (Throwable e){
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+	}
+
+	@Override
 	public void slettAnsatt(int id) {
 		
 		EntityManager em = emf.createEntityManager();

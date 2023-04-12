@@ -21,6 +21,12 @@ public interface AnsattDAOInterface {
 	
 	/** Update - Oppdatere en ansatt-rad i databasen */
 	void oppdaterAnsatt(int id, String nyttBrukernavn, String nyttFornavn, String nyttEtternavn, String nyStilling, int nyMaanedsLonn);
+
+	/** Update - Oppdatere stilling i en ansatt-rad i databasen */
+	void oppdaterStilling(int id, String nyStilling);
+
+	/** Update - Oppdatere Månedslønn i en ansatt-rad i databasen */
+	void oppdaterLonn(int id, int nyLonn);
 	
 	/** Delete - Slette en ansatt-rad fra databasen */
 	void slettAnsatt(int id);
