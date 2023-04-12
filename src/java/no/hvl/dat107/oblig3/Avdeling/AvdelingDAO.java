@@ -97,6 +97,19 @@ public class AvdelingDAO implements AvdelingDAOInterface {
     }
 
     @Override
+    public List<Ansatt> getAnsatte(Integer id) {
+        EntityManager em = emf.createEntityManager();
+        String jpqlQuery = "SELECT a FROM Ansatt as a WHERE a.avdeling = :id";
+
+        try {
+            TypedQuery<Ansatt> query = em.createQuery(jpqlQuery, Ansatt.class).setParameter("id", id);
+            return query.getResultList(); //Henter ut basert på spørring
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
     public void slettAvdeling(int id) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();

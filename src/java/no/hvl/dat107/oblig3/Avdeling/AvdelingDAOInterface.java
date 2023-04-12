@@ -1,5 +1,7 @@
 package no.hvl.dat107.oblig3.Avdeling;
 
+import no.hvl.dat107.oblig3.Ansatt.Ansatt;
+
 import java.util.List;
 
 public interface AvdelingDAOInterface {
@@ -19,6 +21,8 @@ public interface AvdelingDAOInterface {
 
         /** Update - Oppdatere en avdeling-rad i databasen */
         void oppdaterAvdeling(int id, String nyttAvdelingNavn, String nySjef);
+
+        List<Ansatt> getAnsatte(Integer id);
 
         /** Delete - Slette en Avdeling-rad fra databasen */
         void slettAvdeling(int id);

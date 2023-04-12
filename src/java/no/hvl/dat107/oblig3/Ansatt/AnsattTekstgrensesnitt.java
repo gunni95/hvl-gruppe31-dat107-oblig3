@@ -1,25 +1,12 @@
 package no.hvl.dat107.oblig3.Ansatt;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface;
+import no.hvl.dat107.oblig3.Teksgrensesnitt;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.Callable;
 
-public class AnsattTekstgrensesnitt {
-    private static <T> T safeRead(Callable<T> operation, String errorMessage) {
-        boolean valid = false;
-        T response = null;
-        while (!valid) {
-            try {
-                response = operation.call();
-                valid = true;
-            } catch (Exception e) {
-                System.out.println(errorMessage + ", " + e.getMessage());
-            }
-        }
-
-        return response;
-    }
+public class AnsattTekstgrensesnitt extends Teksgrensesnitt {
 
     public static Ansatt LesInnNyAnsatt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO) {
         String brukernavn;
