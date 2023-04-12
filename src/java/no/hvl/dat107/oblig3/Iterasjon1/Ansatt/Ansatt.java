@@ -9,78 +9,68 @@ public class Ansatt {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String Brukernavn;
-	private String Fornavn;
-	private String Etternavn;
-	private String AnsettelsesDato;
-	private String Stilling;
-	private Integer MaanedsLonn;
+	private String brukernavn;
+	private String fornavn;
+	private String etternavn;
+	private String ansettelsesDato;
+	private String stilling;
+	private Integer maanedsLonn;
 	
 	public Ansatt() {
 		
 	}
 
-	public Ansatt(Integer id, String Brukernavn, String Fornavn, String Etternavn, String AnsettelsesDato, String Stilling, Integer MaanedsLonn) {
-		this.id = id;
-		this.Brukernavn = Brukernavn;
-		this.Fornavn = Fornavn;
-		this.Etternavn = Etternavn;
-		this.AnsettelsesDato = AnsettelsesDato;
-		this.Stilling = Stilling;
-		this.MaanedsLonn = MaanedsLonn;
+	public Ansatt(String brukernavn, String fornavn, String etternavn, String ansettelsesDato, String stilling, Integer maanedsLonn) {
+		this.brukernavn = brukernavn;
+		this.fornavn = fornavn;
+		this.etternavn = etternavn;
+		this.ansettelsesDato = ansettelsesDato;
+		this.stilling = stilling;
+		this.maanedsLonn = maanedsLonn;
 	}
 
-	public Ansatt(String Brukernavn, String Fornavn, String Etternavn, String AnsettelsesDato, String Stilling, Integer MaanedsLonn) {
-		this.Brukernavn = Brukernavn;
-		this.Fornavn = Fornavn;
-		this.Etternavn = Etternavn;
-		this.AnsettelsesDato = AnsettelsesDato;
-		this.Stilling = Stilling;
-		this.MaanedsLonn = MaanedsLonn;
-	}
-	
 	public Integer getId() {
 		return this.id;
 	}
 	public String getBrukernavn() {
-		return Brukernavn;
+		return brukernavn;
 	}
-	public void setBrukernavn(String Brukernavn) {
-		this.Brukernavn = Brukernavn;
+	public void setBrukernavn(String brukernavn) {
+		this.brukernavn = brukernavn;
 	}
 	public String getFornavn() {
-		return Fornavn;
+		return fornavn;
 	}
-	public void setFornavn(String Fornavn) {
-		this.Fornavn = Fornavn;
+	public void setFornavn(String fornavn) {
+		this.fornavn = fornavn;
 	}
 	public String getEtternavn() {
-		return Etternavn;
+		return etternavn;
 	}
-	public void setEtternavn(String Etternavn) {
-		this.Etternavn = Etternavn;
+	public void setEtternavn(String etternavn) {
+		this.etternavn = etternavn;
 	}
 	public String getAnsettelsesDato() {
-		return AnsettelsesDato;
+		return ansettelsesDato;
 	}
-	public void setAnsettelsesDato(String AnsettelsesDato) {
-		this.AnsettelsesDato = AnsettelsesDato;
+	public void setAnsettelsesDato(String ansettelsesDato) {
+		this.ansettelsesDato = ansettelsesDato;
 	}
 	public String getStilling() {
-		return Stilling;
+		return stilling;
 	}
-	public void setStilling(String Stilling) {
-		this.Stilling = Stilling;
+	public void setStilling(String stilling) {
+		this.stilling = stilling;
 	}
 	public Integer getMaanedsLonn() {
-		return MaanedsLonn;
+		return maanedsLonn;
 	}
-	public void setMaanedsLonn(Integer MaanedsLonn) {
-		this.MaanedsLonn = MaanedsLonn;
+	public void setMaanedsLonn(Integer maanedsLonn) {
+		this.maanedsLonn = maanedsLonn;
 	}
-	
+
 	@Override
 	public String toString() {
-		return String.format("Ansatt: id=%1$d, Brukernavn=%2$s, Fornavn=%3$s, Etternavn=%4$s, AnsettelsesDato=%5$s, Stilling=%6$s, MaanedsLonn=%7$d", id, Brukernavn, Fornavn, Etternavn, AnsettelsesDato, Stilling, MaanedsLonn);
+		return String.format("Ansatt: id=%1$d, Brukernavn=%2$s, Fornavn=%3$s, Etternavn=%4$s, AnsettelsesDato=%5$s, Stilling=%6$s, MaanedsLonn=%7$d", id, brukernavn, fornavn, etternavn, ansettelsesDato, stilling, maanedsLonn);
 	}
 }
