@@ -1,4 +1,4 @@
-package no.hvl.dat107.oblig3.Iterasjon1.Ansatt;
+package no.hvl.dat107.oblig3.Ansatt;
 
 import java.util.List;
 

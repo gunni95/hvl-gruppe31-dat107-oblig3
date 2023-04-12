@@ -1,6 +1,7 @@
-package no.hvl.dat107.oblig3.Iterasjon1.Avdeling;
+package no.hvl.dat107.oblig3.Avdeling;
 
 import jakarta.persistence.*;
+import no.hvl.dat107.oblig3.Ansatt.Ansatt;
 
 import java.util.List;
 

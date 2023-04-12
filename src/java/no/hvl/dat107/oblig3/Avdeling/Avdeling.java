@@ -1,23 +1,20 @@
-package no.hvl.dat107.oblig3.Iterasjon1.Avdeling;
+package no.hvl.dat107.oblig3.Avdeling;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(schema = "oblig3", name = "avdeling")
 @NamedQuery(name = "hentAlleAvdelinger", query = "SELECT a FROM Avdeling as a order by a.id")
 public class Avdeling {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String navn;
     private String sjef; // required og burde være en AnsattId
 
 
-    public Avdeling(Integer avdelingId, String avdelingNavn, String avdelingSjef){
-        this.id = avdelingId;
+    public Avdeling(String avdelingNavn, String avdelingSjef){
         this.navn = avdelingNavn;
         this.sjef = avdelingSjef;
     }
@@ -26,12 +23,6 @@ public class Avdeling {
 
     }
 
-    public Integer getAvdelingId(){
-        return this.id;
-    }
-    public void setAvdelingId(Integer avdelingId){
-        this.id = avdelingId;
-    }
     public String getAvdelingNavn(){
         return this.navn;
     }
