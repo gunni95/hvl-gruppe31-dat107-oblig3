@@ -54,7 +54,7 @@ public class AvdelingDAO implements AvdelingDAOInterface {
     @Override
     public List<Avdeling> hentAlleAvdelinger() {
         EntityManager em = emf.createEntityManager();
-        String jpqlQuery = "SELECT a FROM Avdeling as a order by a.avdelingId";
+        String jpqlQuery = "SELECT a FROM Avdeling as a order by a.id";
 
         try {
             TypedQuery<Avdeling> query = em.createQuery(jpqlQuery, Avdeling.class);
