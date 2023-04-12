@@ -15,6 +15,7 @@ public class Ansatt {
 	private String fornavn;
 	private String etternavn;
 	private String ansettelsesDato;
+	private Integer avdeling;
 	private String stilling;
 	private Integer maanedsLonn;
 	
@@ -22,11 +23,12 @@ public class Ansatt {
 		
 	}
 
-	public Ansatt(String brukernavn, String fornavn, String etternavn, String ansettelsesDato, String stilling, Integer maanedsLonn) {
+	public Ansatt(String brukernavn, String fornavn, String etternavn, String ansettelsesDato, Integer avdeling, String stilling, Integer maanedsLonn) {
 		this.brukernavn = brukernavn;
 		this.fornavn = fornavn;
 		this.etternavn = etternavn;
 		this.ansettelsesDato = ansettelsesDato;
+		this.avdeling = avdeling;
 		this.stilling = stilling;
 		this.maanedsLonn = maanedsLonn;
 	}

@@ -34,7 +34,9 @@ public class AvdelingDAO implements AvdelingDAOInterface {
 
         try {
             return em.find(Avdeling.class, id ); //Henter ut på primærnøkkel
-        } finally {
+        } catch (NoResultException e){
+            return null;
+        }  finally {
             em.close();
         }
     }
@@ -44,7 +46,11 @@ public class AvdelingDAO implements AvdelingDAOInterface {
         EntityManager em = emf.createEntityManager();
 
         try {
-            return em.find(Avdeling.class, avdelingNavn); //Henter ut på primærnøkkel
+            return em.createQuery(
+                            "SELECT a from Avdeling a WHERE a.navn = :avdelingNavn", Avdeling.class).
+                    setParameter("avdelingNavn", avdelingNavn).getSingleResult(); //Henter ut på primærnøkkel
+        } catch (NoResultException e){
+            return null;
         } finally {
             em.close();
         }

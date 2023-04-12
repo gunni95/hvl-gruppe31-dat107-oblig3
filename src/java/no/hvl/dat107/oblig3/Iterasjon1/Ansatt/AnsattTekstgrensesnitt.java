@@ -1,4 +1,6 @@
 package no.hvl.dat107.oblig3.Iterasjon1.Ansatt;
+import no.hvl.dat107.oblig3.Iterasjon1.Avdeling.AvdelingDAOInterface;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.Callable;
@@ -19,37 +21,38 @@ public class AnsattTekstgrensesnitt {
         return response;
     }
 
-    public static Ansatt LesInnNyAnsatt(AnsattDAOInterface DAO) {
+    public static Ansatt LesInnNyAnsatt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO) {
         String brukernavn;
         String fornavn;
         String etternavn;
         String ansettelsesdato;
         String stilling;
         Integer maanedslonn;
+        int avdeling;
 
         Scanner input = new Scanner(System.in);
 
         brukernavn = safeRead(() -> {
-            System.out.println("Brukernavn: ");
+            System.out.print("Brukernavn: ");
             String res = input.nextLine();
-            if (DAO.finnAnsattMedBrukernavn(res) != null) {
+            if (anDAO.finnAnsattMedBrukernavn(res) != null) {
                 throw new Exception("Brukernavn er allerede tatt");
             }
             return res;
         }, "Ikke gyldig brukernavn");
 
         fornavn = safeRead(() -> {
-            System.out.println("Fornavn: ");
+            System.out.print("Fornavn: ");
             return input.nextLine();
         }, "Ikke gyldig fornavn");
 
         etternavn = safeRead(() -> {
-            System.out.println("Etternavn: ");
+            System.out.print("Etternavn: ");
             return input.nextLine();
         }, "Ikke gyldig etternavn");
 
         ansettelsesdato = safeRead(() -> {
-            System.out.println("dato (dd.mm.yyyy): ");
+            System.out.print("dato (dd.mm.yyyy): ");
             String res = input.nextLine();
             String[] dateSections = res.split("\\-|\\.| ");
             int day = Integer.parseInt(dateSections[0]);
@@ -63,32 +66,42 @@ public class AnsattTekstgrensesnitt {
             String formatedMonth = String.format("%2d", month);
             String formatedYear = String.format("%4d", year);
 
-            return formatedDay + "." + formatedMonth + "." + formatedYear;
+            return formatedYear + "." + formatedMonth + "." + formatedDay;
         }, "Ikke gyldig dato");
 
+        avdeling = safeRead(() -> {
+            System.out.print("Avdeling: ");
+            String res = input.nextLine();
+            try {
+               return avDAO.finnAvdelingMedId(Integer.parseInt(res)).getId();
+            } catch (Exception e){
+                return avDAO.finnAvdelingMedNavn(res).getId();
+            }
+        }, "Ikke gyldig avdeling");
+
         stilling = safeRead(() -> {
-            System.out.println("Stilling: ");
+            System.out.print("Stilling: ");
             return input.nextLine();
         }, "Ikke gyldig stilling");
 
         maanedslonn = safeRead(() -> {
-            System.out.println("Månedslønn: ");
+            System.out.print("Månedslønn: ");
             return Integer.parseInt(input.nextLine());
         }, "Ikke gyldig lønn");
 
         input.close();
-        return new Ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, stilling, maanedslonn);
+        return new Ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, avdeling, stilling, maanedslonn);
     }
 
     public static Ansatt oppdaterAnsatt(AnsattDAOInterface DAO) {
         Scanner input = new Scanner(System.in);
         int sokId = safeRead(() -> {
-            System.out.println("Skriv id på ansatt du vil oppdatere:");
+            System.out.print("Skriv id på ansatt du vil oppdatere: ");
             return Integer.parseInt(input.nextLine());
         }, "Ikke gyldig Ansatt id");
 
         String nyStilling = safeRead(() -> {
-            System.out.println("Skriv inn ny stilling:");
+            System.out.print("Skriv inn ny stilling: ");
             return input.nextLine();
         }, "Ikke gyldig stilling");
 
