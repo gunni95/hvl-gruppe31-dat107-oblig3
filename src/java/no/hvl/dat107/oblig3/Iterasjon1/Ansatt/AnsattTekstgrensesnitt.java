@@ -50,12 +50,13 @@ public class AnsattTekstgrensesnitt {
             String[] dateSections = res.split("-|.| ");
             int day = Integer.parseInt(dateSections[0]);
             int month = Integer.parseInt(dateSections[1]);
-            if (day < 31 || (month >= 1 && month <= 12) || dateSections[2].length() > 0) {
+            int year = Integer.parseInt(dateSections[2]);
+            if (day < 31 || (month >= 1 && month <= 12) || Integer.toString(year).length() == 0) {
                 throw new Exception("Ikke gyldig datoformat");
             }
-            String formatedDay = String.format("%2d", dateSections[0]);
-            String formatedMonth = String.format("%2d", dateSections[1]);
-            String formatedYear = String.format("%4d", dateSections[2]);
+            String formatedDay = String.format("%2d", day);
+            String formatedMonth = String.format("%2d", month);
+            String formatedYear = String.format("%4d", year);
 
             return formatedDay + "." + formatedMonth + "." + formatedYear;
         }, "Ikke gyldig dato");
