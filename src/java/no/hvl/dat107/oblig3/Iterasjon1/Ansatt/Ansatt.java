@@ -1,15 +1,13 @@
 package no.hvl.dat107.oblig3.Iterasjon1.Ansatt;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(schema = "oblig3", name="ansatt")
 @NamedQuery(name = "hentAlleAnsatte", query = "SELECT a FROM Ansatt as a order by a.id")
 public class Ansatt {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String Brukernavn;
 	private String Fornavn;
@@ -20,6 +18,16 @@ public class Ansatt {
 	
 	public Ansatt() {
 		
+	}
+
+	public Ansatt(Integer id, String Brukernavn, String Fornavn, String Etternavn, String AnsettelsesDato, String Stilling, Integer MaanedsLonn) {
+		this.id = id;
+		this.Brukernavn = Brukernavn;
+		this.Fornavn = Fornavn;
+		this.Etternavn = Etternavn;
+		this.AnsettelsesDato = AnsettelsesDato;
+		this.Stilling = Stilling;
+		this.MaanedsLonn = MaanedsLonn;
 	}
 
 	public Ansatt(String Brukernavn, String Fornavn, String Etternavn, String AnsettelsesDato, String Stilling, Integer MaanedsLonn) {

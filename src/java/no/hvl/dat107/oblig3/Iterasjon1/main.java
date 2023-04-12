@@ -7,25 +7,14 @@ import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattDAOInterface;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 public class main {
 
 	private static final AnsattDAOInterface DAO = new AnsattDAO();
 	public static void main(String[] args) {
 		
 		skrivUt("Start.");
-		
-		DAO.lagreAnsatt(new Ansatt("Jan", "Jan", "Banan", "2022-11-11", "Bilmekaniker", 44000));
-		skrivUt("Lagt til Jan.");
-		
-		DAO.oppdaterAnsatt(0004, null, null, "Heisekran", null, 0);
-		skrivUt("Endret Etternavn.");
-		
-		DAO.slettAnsatt(0001);
-		skrivUt("Slettet ansatt 0001.");
-		
-		DAO.lagreAnsatt(new Ansatt("Don", "Don", "Duck", "2022-01-01", "Kokk", 40000));
-		DAO.slettAnsatt(0004);
-		skrivUt("Tilbakestillt database.");
 
 
 		Ansatt nyAnsatt = new Ansatt();
@@ -60,18 +49,34 @@ public class main {
 				break;
 			case "d": // d) Oppdatere ansatt
 				System.out.println("Skriv id på ansatt du vil oppdatere:");
-				sokId = input.nextInt();
+				String idd = input.nextLine();
+				int iddd = parseInt(idd);
 				System.out.println("Skriv inn ny stilling og/eller ny lønn");
 				System.out.println("Skriv inn ny stilling:");
 				String nyStilling = input.nextLine();
 				System.out.println("Skriv inn ny lønn:");
-				int nyLonn = input.nextInt();
-				DAO.oppdaterStilling(sokId, nyStilling);
-				DAO.oppdaterLonn(sokId, nyLonn);
+				String nyLonn = input.nextLine();
+				int nylLonn = parseInt(nyLonn);
+				DAO.oppdaterStilling(iddd, nyStilling);
+				DAO.oppdaterLonn(iddd, nylLonn);
+				skrivUt("Oppdatert ansattliste");
 				break;
 			case "e": // e) Legg til ny ansatt
-
-
+				System.out.println("Skriv inn unikt brukernavn:");
+				String eBrukernavn = input.nextLine();
+				System.out.println("Skriv inn fornavn:");
+				String eFornavn = input.nextLine();
+				System.out.println("Skriv inn etternavn:");
+				String eEtternavn = input.nextLine();
+				System.out.println("Skriv inn Dato:");
+				String eDato = input.nextLine();
+				System.out.println("Skriv inn stilling");
+				String eStilling = input.nextLine();
+				System.out.println("Skriv inn lønn");
+				String eLonn = input.nextLine();
+				int eLoon = parseInt(eLonn);
+				DAO.lagreAnsatt(new Ansatt(eBrukernavn, eFornavn, eEtternavn, eDato, eStilling, eLoon));
+				skrivUt("Oppdatert ansattliste");
 				break;
 		}
 
