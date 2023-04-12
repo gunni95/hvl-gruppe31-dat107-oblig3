@@ -16,9 +16,8 @@ public class Klient {
 		
 		AnsattTekstgrensesnitt.skrivUt(anDAO, "Start.");
 
-		Scanner input = new Scanner(System.in);
-
 		while (!done) {
+			Scanner input = new Scanner(System.in);
 			String funksjonTxt = "Velg fuknsjon\n a) Søk ansatt med id\n b) Søk ansatt med brukernavn\n c) Liste med ansatte\n d) Oppdatere ansatt\n e) Legg til ny ansatt \n 0) Avslutt";
 
 			System.out.println(funksjonTxt);
