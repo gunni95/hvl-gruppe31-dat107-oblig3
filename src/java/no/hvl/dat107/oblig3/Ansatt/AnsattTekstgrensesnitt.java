@@ -59,7 +59,7 @@ public class AnsattTekstgrensesnitt {
             int month = Integer.parseInt(dateSections[1]);
             int year = Integer.parseInt(dateSections[2]);
             System.out.println(day + ", " + month + ", " + year);
-            if (day > 31 || day < 1 || month < 1 || month >= 12 || Integer.toString(year).length() == 0) {
+            if (day > 31 || day < 1 || month < 1 || month > 12 || Integer.toString(year).length() == 0) {
                 throw new Exception("Ikke gyldig datoformat");
             }
             String formatedDay = String.format("%2d", day);
@@ -89,13 +89,12 @@ public class AnsattTekstgrensesnitt {
             return Integer.parseInt(input.nextLine());
         }, "Ikke gyldig lønn");
 
-        input.close();
         Ansatt nyAnsatt = new Ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, avdeling, stilling, maanedslonn);
         anDAO.lagreAnsatt(nyAnsatt);
         return nyAnsatt;
     }
 
-    public static Ansatt oppdaterAnsatt(AnsattDAOInterface DAO) {
+    public static Ansatt oppdaterAnsatt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO) {
         Scanner input = new Scanner(System.in);
         Integer sokId = safeRead(() -> {
             System.out.print("Skriv id på ansatt du vil oppdatere: ");
@@ -124,7 +123,7 @@ public class AnsattTekstgrensesnitt {
             return res;
         }, "Ikke gyldig stilling");
 
-        int nyLonn = safeRead(() -> {
+        Integer nyLonn = safeRead(() -> {
             System.out.println("Skriv inn ny lønn:");
             String res = input.nextLine();
             if (res.length() == 0) {
@@ -133,23 +132,25 @@ public class AnsattTekstgrensesnitt {
             return Integer.parseInt(res);
         }, "Ikke gyldig lønn");
 
-        input.close();
-
-        DAO.oppdaterAvdeling(sokId, nyAvdeling);
-        DAO.oppdaterStilling(sokId, nyStilling);
-        DAO.oppdaterLonn(sokId, nyLonn);
-        return DAO.finnAnsattMedId(sokId);
+        if (nyAvdeling != null) {
+            anDAO.oppdaterAvdeling(sokId, nyAvdeling);
+        }
+        if (nyStilling != null) {
+            anDAO.oppdaterStilling(sokId, nyStilling);
+        }
+        if (nyLonn != null) {
+            anDAO.oppdaterLonn(sokId, nyLonn);
+        }
+        return anDAO.finnAnsattMedId(sokId);
     }
 
     public static Ansatt finnAnsattMedBrukernavn(AnsattDAOInterface DAO) {
         Scanner input = new Scanner(System.in);
 
         String sokBrukernavn = safeRead(() -> {
-            System.out.print("Skriv inn brukernavn:");
+            System.out.print("Skriv inn brukernavn: ");
             return input.nextLine();
         }, "Ikke gyldig søkeverdi");
-
-        input.close();
 
         return DAO.finnAnsattMedBrukernavn(sokBrukernavn);
     }
@@ -158,11 +159,9 @@ public class AnsattTekstgrensesnitt {
         Scanner input = new Scanner(System.in);
 
         int brukerId = safeRead(() -> {
-            System.out.print("Skriv inn id:");
+            System.out.print("Skriv inn id: ");
             return Integer.parseInt(input.nextLine());
         }, "Ikke gyldig søkeverdi");
-
-        input.close();
 
         return DAO.finnAnsattMedId(brukerId);
     }
