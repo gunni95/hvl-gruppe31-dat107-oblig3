@@ -15,11 +15,6 @@ public class main {
 		
 		skrivUt("Start.");
 
-
-		Ansatt nyAnsatt = new Ansatt();
-		int sokId = 0;
-		String sokBrukernavn = null;
-
 		Scanner input = new Scanner(System.in);
 
 		String funksjonTxt = "Velg fuknsjon\n a) Søk ansatt med id\n b) Søk ansatt med brukernavn\n c) Liste med ansatte\n d) Oppdatere ansatt\n e) Legg til ny ansatt";
