@@ -54,7 +54,7 @@ public class AnsattDAO implements AnsattDAOInterface {
 
 		try {
 			return em.createQuery(
-							"SELECT a from Ansatt a WHERE a.Brukernavn = :brukernavn", Ansatt.class).
+							"SELECT a from Ansatt a WHERE a.brukernavn = :brukernavn", Ansatt.class).
 					setParameter("brukernavn", brukernavn).getSingleResult(); //Henter ut på primærnøkkel
 		} finally {
 			em.close();
