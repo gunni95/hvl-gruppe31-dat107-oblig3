@@ -137,9 +137,7 @@ public class AnsattDAO implements AnsattDAOInterface {
 			tx.begin();
 
 			Ansatt a = em.find(Ansatt.class, id); //Finne rad som skal oppdateres
-			if(nyStilling != null && !nyStilling.equals("0")) {
-				a.setStilling(nyStilling);
-			}
+			a.setStilling(nyStilling);
 			tx.commit();
 		} catch (Throwable e){
 			e.printStackTrace();
@@ -159,9 +157,7 @@ public class AnsattDAO implements AnsattDAOInterface {
 			tx.begin();
 
 			Ansatt a = em.find(Ansatt.class, id); //Finne rad som skal oppdateres
-			if(nyLonn != 0) {
-				a.setMaanedsLonn(nyLonn);
-			}
+			a.setMaanedsLonn(nyLonn);
 			tx.commit();
 		} catch (Throwable e){
 			e.printStackTrace();
