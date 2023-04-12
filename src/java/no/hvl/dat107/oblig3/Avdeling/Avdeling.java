@@ -39,4 +39,5 @@ public class Avdeling {
     public Integer getId() {
         return this.id;
     }
+
 }
