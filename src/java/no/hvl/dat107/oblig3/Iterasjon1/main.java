@@ -10,12 +10,11 @@ import java.util.Scanner;
 public class main {
 
 	private static final AnsattDAOInterface DAO = new AnsattDAO();
-	private static Integer lastId = DAO.getLastId();
 	public static void main(String[] args) {
 		
 		skrivUt("Start.");
 		
-		DAO.lagreAnsatt(new Ansatt(lastId, "Jan", "Jan", "Banan", "2022-11-11", "Bilmekaniker", 44000));
+		DAO.lagreAnsatt(new Ansatt("Jan", "Jan", "Banan", "2022-11-11", "Bilmekaniker", 44000));
 		skrivUt("Lagt til Jan.");
 		
 		DAO.oppdaterAnsatt(0004, null, null, "Heisekran", null, 0);
@@ -24,7 +23,7 @@ public class main {
 		DAO.slettAnsatt(0001);
 		skrivUt("Slettet ansatt 0001.");
 		
-		DAO.lagreAnsatt(new Ansatt(lastId, "Don", "Don", "Duck", "2022-01-01", "Kokk", 40000));
+		DAO.lagreAnsatt(new Ansatt("Don", "Don", "Duck", "2022-01-01", "Kokk", 40000));
 		DAO.slettAnsatt(0004);
 		skrivUt("Tilbakestillt database.");
 
