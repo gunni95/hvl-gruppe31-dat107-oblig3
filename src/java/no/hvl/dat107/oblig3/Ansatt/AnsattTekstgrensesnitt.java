@@ -90,7 +90,9 @@ public class AnsattTekstgrensesnitt {
         }, "Ikke gyldig lønn");
 
         input.close();
-        return new Ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, avdeling, stilling, maanedslonn);
+        Ansatt nyAnsatt = new Ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, avdeling, stilling, maanedslonn);
+        anDAO.lagreAnsatt(nyAnsatt);
+        return nyAnsatt;
     }
 
     public static Ansatt oppdaterAnsatt(AnsattDAOInterface DAO) {
