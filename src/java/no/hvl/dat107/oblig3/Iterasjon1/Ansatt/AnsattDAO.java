@@ -34,20 +34,6 @@ public class AnsattDAO implements AnsattDAOInterface {
 			em.close();
 		}
 	}
-
-	@Override
-	public Integer getLastId() {
-		List<Ansatt> list = this.hentAlleAnsatte();
-		Integer max = 0;
-
-		for (Ansatt ansatt : list) {
-			if (ansatt.getId() > max) {
-				max = ansatt.getId();
-			}
-		}
-
-		return max;
-	}
 	
 	@Override
 	public Ansatt finnAnsattMedId(int id) {

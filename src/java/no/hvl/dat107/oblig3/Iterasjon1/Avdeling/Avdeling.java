@@ -8,36 +8,44 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(schema = "avdelinger")
-@NamedQuery(name = "hentAlleAvdelinger", query = "SELECT a FROM Avdeling as a order by a.avdelingId")
+@NamedQuery(name = "hentAlleAvdelinger", query = "SELECT a FROM Avdeling as a order by a.id")
 public class Avdeling {
-    @Id static Integer avdelingId;
-    static String avdelingNavn;
-    static String avdelingSjef; // required og burde være en AnsattId
-
+    @Id
+    private Integer id;
+    private String navn;
+    private String sjef; // required og burde være en AnsattId
 
 
     public Avdeling(Integer avdelingId, String avdelingNavn, String avdelingSjef){
-        this.avdelingId = avdelingId;
-        this.avdelingNavn = avdelingNavn;
-        this.avdelingSjef = avdelingSjef;
+        this.id = avdelingId;
+        this.navn = avdelingNavn;
+        this.sjef = avdelingSjef;
     }
 
     public Avdeling() {
 
     }
 
-    public Integer getAvdelingId(){return avdelingId;}
-    public Integer setAvdelingId(Integer avdelingId){this.avdelingId = avdelingId;}
-    public String getAvdelingNavn(){return avdelingNavn;}
-    public void setAvdelingNavn(String avdelingNavn){this.avdelingNavn = avdelingNavn;}
-    public String getAvdelingSjef(){return avdelingSjef;}
-    public String setAvdelingSjef(String avdelingSjef){this.avdelingSjef = avdelingSjef;}
-
-    public void setId(Long id) {
-        this.id = id;
+    public Integer getAvdelingId(){
+        return this.id;
+    }
+    public void setAvdelingId(Integer avdelingId){
+        this.id = avdelingId;
+    }
+    public String getAvdelingNavn(){
+        return this.navn;
+    }
+    public void setAvdelingNavn(String avdelingNavn){
+        this.navn = avdelingNavn;
+    }
+    public String getAvdelingSjef(){
+        return this.sjef;
+    }
+    public void setAvdelingSjef(String avdelingSjef){
+        this.sjef = avdelingSjef;
     }
 
-    public Long getId() {
-        return id;
+    public Integer getId() {
+        return this.id;
     }
 }
