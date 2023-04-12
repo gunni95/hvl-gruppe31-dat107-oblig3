@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class Ansatt {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id = 0000;
+	private Integer id;
 	private String brukernavn;
 	private String fornavn;
 	private String etternavn;

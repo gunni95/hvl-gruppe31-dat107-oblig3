@@ -3,6 +3,8 @@ package no.hvl.dat107.oblig3.Ansatt;
 import java.util.List;
 
 import jakarta.persistence.*;
+import no.hvl.dat107.oblig3.Avdeling.AvdelingDAO;
+import no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface;
 
 public class AnsattDAO implements AnsattDAOInterface {
 
@@ -185,6 +187,14 @@ public class AnsattDAO implements AnsattDAOInterface {
 		} finally {
 			em.close();
 		}
+	}
+
+	@Override
+	public boolean erSjef(Integer ansattId) {
+		Ansatt ansatt = finnAnsattMedId(ansattId);
+		AvdelingDAOInterface avDAO = new AvdelingDAO();
+
+		return avDAO.finnAvdelingMedId(ansatt.getAvdeling()).getAvdelingSjef().equals(ansatt.getBrukernavn());
 	}
 
 	@Override

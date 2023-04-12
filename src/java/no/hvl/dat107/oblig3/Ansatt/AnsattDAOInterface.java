@@ -22,6 +22,9 @@ public interface AnsattDAOInterface {
 	/** Update - Oppdatere en ansatt-rad i databasen */
 	void oppdaterAnsatt(int id, String nyttBrukernavn, String nyttFornavn, String nyttEtternavn, Integer avdeling, String nyStilling, Integer nyMaanedsLonn);
 
+	/** Control - Sjekker om ansatt er sjef */
+	boolean erSjef(Integer ansattId);
+
 	/** Update - Oppdatere stilling i en ansatt-rad i databasen */
 	void oppdaterAvdeling(int ansattId, int avdelingId);
 
