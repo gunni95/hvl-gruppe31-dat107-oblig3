@@ -8,7 +8,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(schema = "ansatte")
 @NamedQuery(name = "hentAlleAnsatte", query = "SELECT a FROM Ansatt as a order by a.id")
-@NamedQuery(name = "hentId", query = "SELECT MAX(id) FROM Ansatt id")
 public class Ansatt {
 	@Id		private Integer id;
 	private String Brukernavn;
