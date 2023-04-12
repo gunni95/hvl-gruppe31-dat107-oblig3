@@ -3,34 +3,32 @@ package no.hvl.dat107.oblig3.Iterasjon1;
 import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.Ansatt;
 import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattDAO;
 import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattDAOInterface;
+import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattTekstgrensesnitt;
 
 import java.util.List;
 import java.util.Scanner;
+
+import static no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattTekstgrensesnitt.skrivUt;
 
 public class main {
 
 	private static final AnsattDAOInterface DAO = new AnsattDAO();
 	public static void main(String[] args) {
 		
-		skrivUt("Start.");
+		skrivUt(DAO,"Start.");
 		
 		DAO.lagreAnsatt(new Ansatt("Jan", "Jan", "Banan", "2022-11-11", "Bilmekaniker", 44000));
-		skrivUt("Lagt til Jan.");
+		skrivUt(DAO,"Lagt til Jan.");
 		
 		DAO.oppdaterAnsatt(0004, null, null, "Heisekran", null, 0);
-		skrivUt("Endret Etternavn.");
+		skrivUt(DAO,"Endret Etternavn.");
 		
 		DAO.slettAnsatt(0001);
-		skrivUt("Slettet ansatt 0001.");
+		skrivUt(DAO, "Slettet ansatt 0001.");
 		
 		DAO.lagreAnsatt(new Ansatt("Don", "Don", "Duck", "2022-01-01", "Kokk", 40000));
 		DAO.slettAnsatt(0004);
-		skrivUt("Tilbakestillt database.");
-
-
-		Ansatt nyAnsatt = new Ansatt();
-		int sokId = 0;
-		String sokBrukernavn = null;
+		skrivUt(DAO, "Tilbakestillt database.");
 
 		Scanner input = new Scanner(System.in);
 
@@ -43,44 +41,28 @@ public class main {
 
 		switch (valg){
 			case "a": // a) Søk ansatt med id
-				System.out.print("Skriv inn id:");
-				sokId = input.nextInt();
-				System.out.println(DAO.finnAnsattMedId(sokId).toString());
-
+				AnsattTekstgrensesnitt.finnAnsatt(DAO);
 				break;
 			case "b": // b) Søk ansatt med brukernavn
-				System.out.print("Skriv inn brukernavn:");
-				sokBrukernavn = input.nextLine();
-				System.out.println(DAO.finnAnsattMedBrukernavn(sokBrukernavn).toString());
-
+				System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsatt(DAO));
 				break;
 			case "c": // c) Liste med ansatt
-				skrivUt("Alle ansatte:");
-
+				System.out.println("Alle ansatte: " + AnsattTekstgrensesnitt.listAnsatte(DAO));
 				break;
 			case "d": // d) Oppdatere ansatt
-				System.out.println("Skriv id på ansatt du vil oppdatere:");
-				sokId = input.nextInt();
-				System.out.println("Skriv inn ny stilling og/eller ny lønn");
-				System.out.println("Skriv inn ny stilling:");
-				String nyStilling = input.nextLine();
-				System.out.println("Skriv inn ny lønn:");
-				int nyLonn = input.nextInt();
-				DAO.oppdaterStilling(sokId, nyStilling);
-				DAO.oppdaterLonn(sokId, nyLonn);
+				System.out.println("Oppdatert ansatt: " + AnsattTekstgrensesnitt.oppdaterAnsatt(DAO));
 				break;
 			case "e": // e) Legg til ny ansatt
-
-
+				System.out.println("Ny ansatt: " + AnsattTekstgrensesnitt.LesInnNyAnsatt(DAO));
 				break;
 		}
 
 
 	}
-	
-	private static void skrivUt(String tekst) {
+
+	public static void skrivUt(AnsattDAOInterface DAO, String tekst) {
 		List<Ansatt> personer = DAO.hentAlleAnsatte();
 		System.out.println("\n--- "+ tekst +" ---");
-		personer.forEach(System.out::println);		
+		personer.forEach(System.out::println);
 	}
 }
