@@ -1,11 +1,9 @@
 package no.hvl.dat107.oblig3.Iterasjon1;
 
-import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.Ansatt;
 import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattDAO;
 import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattDAOInterface;
 import no.hvl.dat107.oblig3.Iterasjon1.Ansatt.AnsattTekstgrensesnitt;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Klient {
@@ -13,7 +11,7 @@ public class Klient {
 	private static final AnsattDAOInterface DAO = new AnsattDAO();
 	public static void main(String[] args) {
 		
-		skrivUt("Start.");
+		AnsattTekstgrensesnitt.skrivUt(DAO, "Start.");
 
 		Scanner input = new Scanner(System.in);
 
@@ -41,13 +39,5 @@ public class Klient {
 				System.out.println("Ny ansatt: " + AnsattTekstgrensesnitt.LesInnNyAnsatt(DAO));
 				break;
 		}
-
-
-	}
-
-	public static void skrivUt(String tekst) {
-		List<Ansatt> personer = DAO.hentAlleAnsatte();
-		System.out.println("\n--- "+ tekst +" ---");
-		personer.forEach(System.out::println);
 	}
 }
