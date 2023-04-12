@@ -15,20 +15,12 @@ public class main {
 	private static final AnsattDAOInterface DAO = new AnsattDAO();
 	public static void main(String[] args) {
 		
-		skrivUt(DAO,"Start.");
-		
-		DAO.lagreAnsatt(new Ansatt("Jan", "Jan", "Banan", "2022-11-11", "Bilmekaniker", 44000));
-		skrivUt(DAO,"Lagt til Jan.");
-		
-		DAO.oppdaterAnsatt(0004, null, null, "Heisekran", null, 0);
-		skrivUt(DAO,"Endret Etternavn.");
-		
-		DAO.slettAnsatt(0001);
-		skrivUt(DAO, "Slettet ansatt 0001.");
-		
-		DAO.lagreAnsatt(new Ansatt("Don", "Don", "Duck", "2022-01-01", "Kokk", 40000));
-		DAO.slettAnsatt(0004);
-		skrivUt(DAO, "Tilbakestillt database.");
+		skrivUt("Start.");
+
+
+		Ansatt nyAnsatt = new Ansatt();
+		int sokId = 0;
+		String sokBrukernavn = null;
 
 		Scanner input = new Scanner(System.in);
 
@@ -60,7 +52,7 @@ public class main {
 
 	}
 
-	public static void skrivUt(AnsattDAOInterface DAO, String tekst) {
+	public static void skrivUt(String tekst) {
 		List<Ansatt> personer = DAO.hentAlleAnsatte();
 		System.out.println("\n--- "+ tekst +" ---");
 		personer.forEach(System.out::println);

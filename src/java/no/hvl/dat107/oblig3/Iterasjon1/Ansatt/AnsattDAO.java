@@ -53,7 +53,9 @@ public class AnsattDAO implements AnsattDAOInterface {
 		EntityManager em = emf.createEntityManager();
 
 		try {
-			return em.find(Ansatt.class, brukernavn); //Henter ut på primærnøkkel
+			return em.createQuery(
+							"SELECT a from Ansatt a WHERE a.Brukernavn = :brukernavn", Ansatt.class).
+					setParameter("brukernavn", brukernavn).getSingleResult(); //Henter ut på primærnøkkel
 		} finally {
 			em.close();
 		}

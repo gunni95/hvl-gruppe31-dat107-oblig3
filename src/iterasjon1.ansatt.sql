@@ -13,6 +13,12 @@ CREATE TABLE ansatt(
                        MaanedsLonn integer,
                        primary key (Id, Brukernavn)
 );
+CREATE TABLE avdeling(
+                         Id SERIAL,
+                         Navn char(20) NOT NULL,
+                         Sjef char(30) NOT NULL,
+                         primary key (Id)
+);
 
 INSERT INTO ansatt(Brukernavn, Fornavn, Etternavn, AnsettelsesDato, Stilling, MaanedsLonn)
 VALUES
