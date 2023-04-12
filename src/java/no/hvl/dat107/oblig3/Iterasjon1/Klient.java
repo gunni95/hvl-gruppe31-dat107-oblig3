@@ -18,7 +18,7 @@ public class Klient {
 		String funksjonTxt = "Velg fuknsjon\n a) Søk ansatt med id\n b) Søk ansatt med brukernavn\n c) Liste med ansatte\n d) Oppdatere ansatt\n e) Legg til ny ansatt";
 
 		System.out.println(funksjonTxt);
-		System.out.println("Ditt valg: ");
+		System.out.print("Ditt valg: ");
 
 		String valg = input.nextLine();
 
