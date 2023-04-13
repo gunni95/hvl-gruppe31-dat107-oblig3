@@ -51,7 +51,7 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
     }
 
 
-    public static Avdeling leggTilAvdeling(AvdelingDAOInterface DAO, AnsattDAOInterface anDAO){
+    public static String leggTilAvdeling(AvdelingDAOInterface DAO, AnsattDAOInterface anDAO){
 
         String avdeling;
         String sjefsBrukernavn;
@@ -82,6 +82,8 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
 
         Avdeling nyAvdeling = new Avdeling(avdeling,sjefsBrukernavn);
         DAO.lagreProsjekt(nyAvdeling);
-        return nyAvdeling;
+
+        String s = nyAvdeling.toString();
+        return s;
     }
 }

@@ -19,6 +19,20 @@ CREATE TABLE ansatt(
                        Avdeling integer,
                        foreign key (Avdeling) REFERENCES avdeling(Id)
 );
+CREATE TABLE prosjekt(
+                         Id SERIAL primary key,
+                         Prosjektnavn char(30) NOT NULL,
+                         Beskrivelse char(100),
+                         Timetall integer
+);
+CREATE TABLE prosjektdeltakelse(
+                                   prosjektid integer,
+                                   foreign key (prosjektid) REFERENCES prosjekt(Id),
+                                   Rolle char(20) NOT NULL,
+                                   Prosjekttimer integer,
+                                   ansattid integer,
+                                   foreign key (ansattid) REFERENCES ansatt(Id)
+);
 
 INSERT INTO avdeling(navn)
 VALUES ('Administrasojn'),

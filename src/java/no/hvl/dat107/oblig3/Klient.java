@@ -61,8 +61,7 @@ public class Klient {
 					System.out.println("\nAvdeling består av: \n\nSjef:" + AvdelingTekstgrensesnitt.hentAnsatteIAvdeling(avDAO));
 					break;
 				case "h": // g) Legg til ny avdeling
-					AvdelingTekstgrensesnitt.leggTilAvdeling(avDAO,anDAO);
-					System.out.println("Ny avdeling lagt til.");
+					System.out.println("Ny avdeling lagt til: \n" + AvdelingTekstgrensesnitt.leggTilAvdeling(avDAO,anDAO));
 					break;
 			}
 		}

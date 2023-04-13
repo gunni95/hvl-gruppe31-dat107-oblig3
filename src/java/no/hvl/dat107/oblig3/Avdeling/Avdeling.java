@@ -40,4 +40,8 @@ public class Avdeling {
         return this.id;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Avdeling: id=%1$d, \nNavn = %2$s, \nSjef = %3$s\n", id, navn, sjef);
+    }
 }

@@ -11,12 +11,14 @@ public class Prosjekt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String navn;
-    private String sjef; // required og burde være en AnsattId
+    private String beskrivelse; // required og burde være en AnsattId
+    private int TotaltTimeantall;
 
 
     public Prosjekt(String ProsjektNavn, String ProsjektSjef){
         this.navn = ProsjektNavn;
-        this.sjef = ProsjektSjef;
+        this.beskrivelse = ProsjektSjef;
+        this.TotaltTimeantall = 0;
     }
 
     public Prosjekt() {
@@ -30,12 +32,17 @@ public class Prosjekt {
         this.navn = ProsjektNavn;
     }
     public String getProsjektSjef(){
-        return this.sjef;
+        return this.beskrivelse;
     }
     public void setProsjektSjef(String ProsjektSjef){
-        this.sjef = ProsjektSjef;
+        this.beskrivelse = ProsjektSjef;
     }
-
+    public int getTotaltTimeantall(){
+        return this.TotaltTimeantall;
+    }
+    public void setTotaltTimeantall(int TotaltTimeantall){
+        this.TotaltTimeantall = TotaltTimeantall;
+    }
     public Integer getId() {
         return this.id;
     }
