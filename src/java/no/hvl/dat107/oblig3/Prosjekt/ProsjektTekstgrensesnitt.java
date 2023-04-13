@@ -19,9 +19,10 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
 
         while (!done) {
             String promptTekst = "Velg operasjon:" +
-                    " a) Finn avdeling\n " +
-                    " b) Hent ansatt i avdeling\n " +
-                    " c) Legg til ny avdeling\n " +
+                    " a) Legg til nytt prosjekt\n " +
+                    " b) Registrere prosjektdeltakelse\n " +
+                    " c) Føre timer\n " +
+                    " d) Skrive ut prosjektinformasjon\n" +
                     " 0) Tilbake";
 
             System.out.println(promptTekst);
@@ -32,15 +33,17 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
                 case "0": // 0) Tilbake
                     done = true;
                     break;
-                case "a": // a) Finn avdeling
-                    System.out.println("Avdeling: " + AvdelingTekstgrensesnitt.finnAvdelingMedId(avDAO));
+                case "a": // a) Legg til nytt prosjekt
+
                     break;
-                case "b": // b) Hent ansatt i avdeling
-                    System.out.println("\nAvdeling består av: \n\nSjef:" + AvdelingTekstgrensesnitt.hentAnsatteIAvdeling(avDAO));
+                case "b": // b) Registrere prosjektdeltakelse
+
                     break;
-                case "c": // c) Legg til ny avdeling
-                    AvdelingTekstgrensesnitt.leggTilAvdeling(avDAO,anDAO);
-                    System.out.println("Ny avdeling lagt til.");
+                case "c": // c) Føre timer
+
+                    break;
+                case "d": // b) Skrive ut prosjektinformasjon
+
                     break;
             }
         }
