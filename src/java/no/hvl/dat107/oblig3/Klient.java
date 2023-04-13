@@ -5,6 +5,8 @@ import no.hvl.dat107.oblig3.Ansatt.AnsattDAOInterface;
 import no.hvl.dat107.oblig3.Ansatt.AnsattTekstgrensesnitt;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingDAO;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingTekstgrensesnitt;
+import no.hvl.dat107.oblig3.Prosjekt.ProsjektDAO;
+import no.hvl.dat107.oblig3.Prosjekt.ProsjektTekstgrensesnitt;
 
 import java.util.Scanner;
 
@@ -12,6 +14,8 @@ public class Klient {
 
 	private static final AnsattDAOInterface anDAO = new AnsattDAO();
 	private static final AvdelingDAO avDAO = new AvdelingDAO();
+
+	private static final ProsjektDAO prDAO = new ProsjektDAO();
 	public static void main(String[] args) {
 		boolean done = false;
 		Scanner input = new Scanner(System.in);
@@ -20,14 +24,9 @@ public class Klient {
 
 		while (!done) {
 			String funksjonTxt = "Velg fuknsjon\n " +
-					"a) Søk ansatt med id\n " +
-					"b) Søk ansatt med brukernavn\n " +
-					"c) Liste med ansatte\n " +
-					"d) Oppdatere ansatt\n " +
-					"e) Legg til ny ansatt\n " +
-					"f) Finn avdeling\n " +
-					"g) Hent ansatt i avdeling\n " +
-					"h) Legg til ny avdeling\n " +
+					"a) Ansatte\n " +
+					"b) Avdelinger\n " +
+					"c) Prosjekter\n " +
 					"0) Avslutt";
 
 			System.out.println(funksjonTxt);
@@ -39,29 +38,14 @@ public class Klient {
 				case "0": // 0) Avslutt
 					done = true;
 					break;
-				case "a": // a) Søk ansatt med id
-					System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsattMedId(anDAO));
+				case "a":
+					AnsattTekstgrensesnitt.ansattGrensesnitt(avDAO, anDAO);
 					break;
-				case "b": // b) Søk ansatt med brukernavn
-					System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsattMedBrukernavn(anDAO));
+				case "b":
+					AvdelingTekstgrensesnitt.avdelingGrensesnitt(avDAO, anDAO);
 					break;
-				case "c": // c) Liste med ansatt
-					System.out.println("Alle ansatte: " + AnsattTekstgrensesnitt.listAnsatte(anDAO));
-					break;
-				case "d": // d) Oppdatere ansatt
-					System.out.println("Oppdatert ansatt: " + AnsattTekstgrensesnitt.oppdaterAnsatt(avDAO, anDAO));
-					break;
-				case "e": // e) Legg til ny ansatt
-					System.out.println("Ny ansatt: " + AnsattTekstgrensesnitt.LesInnNyAnsatt(avDAO, anDAO));
-					break;
-				case "f": // f) Finn avdeling
-					System.out.println("Avdeling: " + AvdelingTekstgrensesnitt.finnAvdelingMedId(avDAO));
-					break;
-				case "g": // g) Hent ansatt i avdeling
-					System.out.println("\nAvdeling består av: \n\nSjef:" + AvdelingTekstgrensesnitt.hentAnsatteIAvdeling(avDAO));
-					break;
-				case "h": // g) Legg til ny avdeling
-					System.out.println("Ny avdeling lagt til: \n" + AvdelingTekstgrensesnitt.leggTilAvdeling(avDAO,anDAO));
+				case "c":
+					ProsjektTekstgrensesnitt.prosjektGrensesnitt(avDAO, anDAO, prDAO);
 					break;
 			}
 		}

@@ -4,6 +4,7 @@ import no.hvl.dat107.oblig3.Ansatt.Ansatt;
 import no.hvl.dat107.oblig3.Ansatt.AnsattDAOInterface;
 import no.hvl.dat107.oblig3.Avdeling.Avdeling;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface;
+import no.hvl.dat107.oblig3.Avdeling.AvdelingTekstgrensesnitt;
 import no.hvl.dat107.oblig3.Teksgrensesnitt;
 
 import java.util.List;
@@ -11,6 +12,39 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
+
+    public static void prosjektGrensesnitt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO, ProsjektDAOInterface prDAO) {
+        Scanner scanner = new Scanner(System.in);
+        boolean done = false;
+
+        while (!done) {
+            String promptTekst = "Velg operasjon:" +
+                    " a) Finn avdeling\n " +
+                    " b) Hent ansatt i avdeling\n " +
+                    " c) Legg til ny avdeling\n " +
+                    " 0) Tilbake";
+
+            System.out.println(promptTekst);
+
+            String input = scanner.nextLine();
+
+            switch (input) {
+                case "0": // 0) Tilbake
+                    done = true;
+                    break;
+                case "a": // a) Finn avdeling
+                    System.out.println("Avdeling: " + AvdelingTekstgrensesnitt.finnAvdelingMedId(avDAO));
+                    break;
+                case "b": // b) Hent ansatt i avdeling
+                    System.out.println("\nAvdeling består av: \n\nSjef:" + AvdelingTekstgrensesnitt.hentAnsatteIAvdeling(avDAO));
+                    break;
+                case "c": // c) Legg til ny avdeling
+                    AvdelingTekstgrensesnitt.leggTilAvdeling(avDAO,anDAO);
+                    System.out.println("Ny avdeling lagt til.");
+                    break;
+            }
+        }
+    }
 
     public static Avdeling finnAvdelingMedNavn(no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface DAO) {
         Scanner input = new Scanner(System.in);

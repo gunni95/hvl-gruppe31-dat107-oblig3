@@ -10,6 +10,39 @@ import java.util.stream.Collectors;
 
 public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
 
+    public static void avdelingGrensesnitt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO) {
+        Scanner scanner = new Scanner(System.in);
+        boolean done = false;
+
+        while (!done) {
+            String promptTekst = "Velg operasjon:" +
+                    " a) Finn avdeling\n " +
+                    " b) Hent ansatt i avdeling\n " +
+                    " c) Legg til ny avdeling\n " +
+                    " 0) Tilbake";
+
+            System.out.println(promptTekst);
+
+            String input = scanner.nextLine();
+
+            switch (input) {
+                case "0": // 0) Tilbake
+                    done = true;
+                    break;
+                case "a": // a) Finn avdeling
+                    System.out.println("Avdeling: " + AvdelingTekstgrensesnitt.finnAvdelingMedId(avDAO));
+                    break;
+                case "b": // b) Hent ansatt i avdeling
+                    System.out.println("\nAvdeling består av: \n\nSjef:" + AvdelingTekstgrensesnitt.hentAnsatteIAvdeling(avDAO));
+                    break;
+                case "c": // c) Legg til ny avdeling
+                    AvdelingTekstgrensesnitt.leggTilAvdeling(avDAO,anDAO);
+                    System.out.println("Ny avdeling lagt til.");
+                    break;
+            }
+        }
+    }
+
     public static Avdeling finnAvdelingMedNavn(AvdelingDAOInterface DAO) {
         Scanner input = new Scanner(System.in);
 

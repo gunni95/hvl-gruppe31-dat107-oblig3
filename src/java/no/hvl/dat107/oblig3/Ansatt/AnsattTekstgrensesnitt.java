@@ -9,6 +9,46 @@ import java.util.concurrent.Callable;
 
 public class AnsattTekstgrensesnitt extends Teksgrensesnitt {
 
+    public static void ansattGrensesnitt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO) {
+        Scanner scanner = new Scanner(System.in);
+        boolean done = false;
+
+        while (!done) {
+            String promptTekst = "Velg operasjon:" +
+                    " a) Søk ansatt med id\n " +
+                    " b) Søk ansatt med brukernavn\n " +
+                    " c) Liste med ansatte\n " +
+                    " d) Oppdatere ansatt\n " +
+                    " e) Legg til ny ansatt\n " +
+                    " 0) Tilbake";
+
+            System.out.println(promptTekst);
+
+            String input = scanner.nextLine();
+
+            switch (input) {
+                case "0": // 0) Tilbake
+                    done = true;
+                    break;
+                case "a": // a) Søk ansatt med id
+                    System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsattMedId(anDAO));
+                    break;
+                case "b": // b) Søk ansatt med brukernavn
+                    System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsattMedBrukernavn(anDAO));
+                    break;
+                case "c": // c) Liste med ansatt
+                    System.out.println("Alle ansatte: " + AnsattTekstgrensesnitt.listAnsatte(anDAO));
+                    break;
+                case "d": // d) Oppdatere ansatt
+                    System.out.println("Oppdatert ansatt: " + AnsattTekstgrensesnitt.oppdaterAnsatt(avDAO, anDAO));
+                    break;
+                case "e": // e) Legg til ny ansatt
+                    System.out.println("Ny ansatt: " + AnsattTekstgrensesnitt.LesInnNyAnsatt(avDAO, anDAO));
+                    break;
+            }
+        }
+    }
+
     public static Ansatt LesInnNyAnsatt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO) {
         String brukernavn;
         String fornavn;
