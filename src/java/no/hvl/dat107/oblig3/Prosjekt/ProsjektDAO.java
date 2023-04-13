@@ -1,18 +1,17 @@
-package no.hvl.dat107.oblig3.Avdeling;
+package no.hvl.dat107.oblig3.Prosjekt;
 
 import jakarta.persistence.*;
-import no.hvl.dat107.oblig3.Ansatt.Ansatt;
 
 import java.util.List;
 
-public class AvdelingDAO implements AvdelingDAOInterface {
+public class ProsjektDAO implements ProsjektDAOInterface {
     private final EntityManagerFactory emf;
-    public AvdelingDAO() {
+    public ProsjektDAO() {
         emf = Persistence.createEntityManagerFactory("ansattPersistenceUnit");
     }
 
     @Override
-    public void lagreProsjekt(Avdeling a) {
+    public void lagreProsjekt(Prosjekt a) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -30,11 +29,11 @@ public class AvdelingDAO implements AvdelingDAOInterface {
     }
 
     @Override
-    public Avdeling finnAvdelingMedId(int id) {
+    public Prosjekt finnProsjektMedId(int id) {
         EntityManager em = emf.createEntityManager();
 
         try {
-            return em.find(Avdeling.class, id ); //Henter ut på primærnøkkel
+            return em.find(Prosjekt.class, id ); //Henter ut på primærnøkkel
         } catch (NoResultException e){
             return null;
         }  finally {
@@ -43,13 +42,13 @@ public class AvdelingDAO implements AvdelingDAOInterface {
     }
 
     @Override
-    public Avdeling finnAvdelingMedNavn(String avdelingNavn) {
+    public Prosjekt finnProsjektMedNavn(String ProsjektNavn) {
         EntityManager em = emf.createEntityManager();
 
         try {
             return em.createQuery(
-                            "SELECT a from Prosjekt a WHERE a.navn = :avdelingNavn", Avdeling.class).
-                    setParameter("avdelingNavn", avdelingNavn).getSingleResult(); //Henter ut på primærnøkkel
+                            "SELECT a from Prosjekt a WHERE a.navn = :ProsjektNavn", Prosjekt.class).
+                    setParameter("ProsjektNavn", ProsjektNavn).getSingleResult(); //Henter ut på primærnøkkel
         } catch (NoResultException e){
             return null;
         } finally {
@@ -58,12 +57,12 @@ public class AvdelingDAO implements AvdelingDAOInterface {
     }
 
     @Override
-    public List<Avdeling> hentAlleAvdelinger() {
+    public List<Prosjekt> hentAlleProsjekter() {
         EntityManager em = emf.createEntityManager();
         String jpqlQuery = "SELECT a FROM Prosjekt as a order by a.id";
 
         try {
-            TypedQuery<Avdeling> query = em.createQuery(jpqlQuery, Avdeling.class);
+            TypedQuery<Prosjekt> query = em.createQuery(jpqlQuery, Prosjekt.class);
             return query.getResultList(); //Henter ut basert på spørring
         } finally {
             em.close();
@@ -71,19 +70,19 @@ public class AvdelingDAO implements AvdelingDAOInterface {
     }
 
     @Override
-    public void oppdaterAvdeling(int id, String nyttAvdelingNavn, String nySjef) {
+    public void oppdaterProsjekt(int id, String nyttProsjektNavn, String nySjef) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             tx.begin();
 
-            Avdeling a = em.find(Avdeling.class, id); //Finne rad som skal oppdateres
-            if(nyttAvdelingNavn != null) {
-                a.setAvdelingNavn(nyttAvdelingNavn);
+            Prosjekt a = em.find(Prosjekt.class, id); //Finne rad som skal oppdateres
+            if(nyttProsjektNavn != null) {
+                a.setProsjektNavn(nyttProsjektNavn);
             }
             if(nySjef != null) {
-                a.setAvdelingSjef(nySjef);
+                a.setProsjektSjef(nySjef);
             }
 
             tx.commit();
@@ -97,12 +96,12 @@ public class AvdelingDAO implements AvdelingDAOInterface {
     }
 
     @Override
-    public List<Ansatt> getAnsatte(Integer id) {
+    public List<Prosjekt> getMedlemmer(Integer id) {
         EntityManager em = emf.createEntityManager();
-        String jpqlQuery = "SELECT a FROM Ansatt as a WHERE a.avdeling = :id";
+        String jpqlQuery = "SELECT p FROM Deltakere as p WHERE p.id = :id";
 
         try {
-            TypedQuery<Ansatt> query = em.createQuery(jpqlQuery, Ansatt.class).setParameter("id", id);
+            TypedQuery<Prosjekt> query = em.createQuery(jpqlQuery, Prosjekt.class).setParameter("id", id);
             return query.getResultList(); //Henter ut basert på spørring
         } finally {
             em.close();
@@ -110,14 +109,14 @@ public class AvdelingDAO implements AvdelingDAOInterface {
     }
 
     @Override
-    public void slettAvdeling(int id) {
+    public void slettProsjekt(int id) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             tx.begin();
 
-            Avdeling a = em.find(Avdeling.class, id); //Finne rad som skal slettes
+            Prosjekt a = em.find(Prosjekt.class, id); //Finne rad som skal slettes
             em.remove(a); //Slette rad som tilsvarer managed oject a
 
             tx.commit();

@@ -7,7 +7,7 @@ import java.util.List;
 public interface AvdelingDAOInterface {
 
         /** Create - Opprette ny Avdeling-rad i databasen */
-        void lagreAvdeling(Avdeling a);
+        void lagreProsjekt(Avdeling a);
 
         /** Read1 - Hente ut avdeling fra databasen. En enkelt med id */
         Avdeling finnAvdelingMedId(int id);

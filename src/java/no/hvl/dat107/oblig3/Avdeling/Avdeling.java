@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(schema = "oblig3", name = "avdeling")
-@NamedQuery(name = "hentAlleAvdelinger", query = "SELECT a FROM Avdeling as a order by a.id")
+@NamedQuery(name = "hentAlleAvdelinger", query = "SELECT a FROM Prosjekt as a order by a.id")
 public class Avdeling {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,16 +1,18 @@
-package no.hvl.dat107.oblig3.Avdeling;
+package no.hvl.dat107.oblig3.Prosjekt;
 
 import no.hvl.dat107.oblig3.Ansatt.Ansatt;
 import no.hvl.dat107.oblig3.Ansatt.AnsattDAOInterface;
+import no.hvl.dat107.oblig3.Avdeling.Avdeling;
+import no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface;
 import no.hvl.dat107.oblig3.Teksgrensesnitt;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
+public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
 
-    public static Avdeling finnAvdelingMedNavn(AvdelingDAOInterface DAO) {
+    public static Avdeling finnAvdelingMedNavn(no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface DAO) {
         Scanner input = new Scanner(System.in);
 
         String sokNavn = safeRead(() -> {
@@ -21,7 +23,7 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
         return DAO.finnAvdelingMedNavn(sokNavn);
     }
 
-    public static Avdeling finnAvdelingMedId(AvdelingDAOInterface DAO) {
+    public static Avdeling finnAvdelingMedId(no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface DAO) {
         Scanner input = new Scanner(System.in);
 
         int id = safeRead(() -> {
@@ -32,7 +34,7 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
         return DAO.finnAvdelingMedId(id);
     }
 
-    public static String hentAnsatteIAvdeling(AvdelingDAOInterface DAO) {
+    public static String hentAnsatteIAvdeling(no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface DAO) {
         Scanner input = new Scanner(System.in);
 
         return safeRead(() -> {
