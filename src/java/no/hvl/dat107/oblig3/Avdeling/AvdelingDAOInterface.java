@@ -24,6 +24,7 @@ public interface AvdelingDAOInterface {
 
         List<Ansatt> getAnsatte(Integer id);
 
+
         /** Delete - Slette en Avdeling-rad fra databasen */
         void slettAvdeling(int id);
 }

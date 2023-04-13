@@ -79,6 +79,6 @@ public class Ansatt {
 
 	@Override
 	public String toString() {
-		return String.format("Ansatt: id=%1$d, Brukernavn=%2$s, Fornavn=%3$s, Etternavn=%4$s, AnsettelsesDato=%5$s, Stilling=%6$s, MaanedsLonn=%7$d", id, brukernavn, fornavn, etternavn, ansettelsesDato, stilling, maanedsLonn);
+		return String.format("Ansatt: id=%1$d, \nBrukernavn = %2$s, \nFornavn = %3$s, \nEtternavn = %4$s, \nAnsettelsesdato = %5$s, \nStilling = %6$s, \nMaanedslonn = %7$d\n", id, brukernavn, fornavn, etternavn, ansettelsesDato, stilling, maanedsLonn);
 	}
 }

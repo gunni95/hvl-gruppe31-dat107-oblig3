@@ -19,7 +19,16 @@ public class Klient {
 		AnsattTekstgrensesnitt.skrivUt(anDAO, "Start.");
 
 		while (!done) {
-			String funksjonTxt = "Velg fuknsjon\n a) Søk ansatt med id\n b) Søk ansatt med brukernavn\n c) Liste med ansatte\n d) Oppdatere ansatt\n e) Legg til ny ansatt\n f) Finn avdeling\n g) Hent ansatt i avdeling\n 0) Avslutt";
+			String funksjonTxt = "Velg fuknsjon\n " +
+					"a) Søk ansatt med id\n " +
+					"b) Søk ansatt med brukernavn\n " +
+					"c) Liste med ansatte\n " +
+					"d) Oppdatere ansatt\n " +
+					"e) Legg til ny ansatt\n " +
+					"f) Finn avdeling\n " +
+					"g) Hent ansatt i avdeling\n " +
+					"h) Legg til ny avdeling\n " +
+					"0) Avslutt";
 
 			System.out.println(funksjonTxt);
 			System.out.print("Ditt valg: ");
@@ -29,6 +38,7 @@ public class Klient {
 			switch (valg){
 				case "0": // 0) Avslutt
 					done = true;
+					break;
 				case "a": // a) Søk ansatt med id
 					System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsattMedId(anDAO));
 					break;
@@ -48,7 +58,11 @@ public class Klient {
 					System.out.println("Avdeling: " + AvdelingTekstgrensesnitt.finnAvdelingMedId(avDAO));
 					break;
 				case "g": // g) Hent ansatt i avdeling
-					System.out.println("Ansatte: " + AvdelingTekstgrensesnitt.hentAnsatteIAvdeling(avDAO));
+					System.out.println("\nAvdeling består av: \n\nSjef:" + AvdelingTekstgrensesnitt.hentAnsatteIAvdeling(avDAO));
+					break;
+				case "h": // g) Legg til ny avdeling
+					AvdelingTekstgrensesnitt.leggTilAvdeling(avDAO,anDAO);
+					System.out.println("Ny avdeling lagt til.");
 					break;
 			}
 		}

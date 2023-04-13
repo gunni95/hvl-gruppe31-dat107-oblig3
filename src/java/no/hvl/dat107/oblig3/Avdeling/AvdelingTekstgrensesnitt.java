@@ -1,12 +1,15 @@
 package no.hvl.dat107.oblig3.Avdeling;
 
 import no.hvl.dat107.oblig3.Ansatt.Ansatt;
+import no.hvl.dat107.oblig3.Ansatt.AnsattDAOInterface;
 import no.hvl.dat107.oblig3.Teksgrensesnitt;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
+
     public static Avdeling finnAvdelingMedNavn(AvdelingDAOInterface DAO) {
         Scanner input = new Scanner(System.in);
 
@@ -29,7 +32,7 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
         return DAO.finnAvdelingMedId(id);
     }
 
-    public static List<Ansatt> hentAnsatteIAvdeling(AvdelingDAOInterface DAO) {
+    public static String hentAnsatteIAvdeling(AvdelingDAOInterface DAO) {
         Scanner input = new Scanner(System.in);
 
         return safeRead(() -> {
@@ -40,7 +43,45 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
             Avdeling avdeling = DAO.finnAvdelingMedId(id);
 
             ansattList.sort((a, b) -> a.getBrukernavn().equals(avdeling.getAvdelingSjef()) ? -1 : a.getId() - b.getId() + 1);
-            return ansattList;
+
+
+            String s = "\n" + ansattList.stream().map(Object::toString).collect(Collectors.joining("\nMedarbeider:\n"));
+            return s;
         }, "Ikke gyldig avdeling");
+    }
+
+
+    public static Avdeling leggTilAvdeling(AvdelingDAOInterface DAO, AnsattDAOInterface anDAO){
+
+        String avdeling;
+        String sjefsBrukernavn;
+
+        Scanner input = new Scanner(System.in);
+
+        avdeling = safeRead(() -> {
+            System.out.println("Skriv inn nytt avdelingsnavn:");
+            String res = input.nextLine();
+            if(DAO.finnAvdelingMedNavn(res) != null){
+                throw new Exception("Avdelingsnavn er tatt");
+            }
+            return res;
+        }, "Ikke gyldig navn");
+
+        sjefsBrukernavn = safeRead(() -> {
+            System.out.println("Skriv inn ny sjefbrukernavn:");
+            String sjef = input.nextLine();
+            Ansatt ansattInfo = anDAO.finnAnsattMedBrukernavn(sjef);
+            if(ansattInfo == null){
+                throw new Exception("Bruker finnes ikke");
+            }
+            if(anDAO.erSjef(ansattInfo.getId())){
+                throw new Exception("Allerede sjef i annen avdeling");
+            }
+            return sjef;
+        }, "Ikke gyldig navn");
+
+        Avdeling nyAvdeling = new Avdeling(avdeling,sjefsBrukernavn);
+        DAO.lagreAvdeling(nyAvdeling);
+        return nyAvdeling;
     }
 }
