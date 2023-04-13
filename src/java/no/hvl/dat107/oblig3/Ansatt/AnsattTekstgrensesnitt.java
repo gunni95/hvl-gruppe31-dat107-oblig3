@@ -93,7 +93,7 @@ public class AnsattTekstgrensesnitt extends Teksgrensesnitt {
             return Integer.parseInt(res);
         }, "Ikke gyldig Ansatt id");
 
-        boolean kanEndreStilling = false; //!anDAO.erSjef(sokId);
+        boolean kanEndreStilling = !anDAO.erSjef(sokId);
         Integer nyAvdeling = null;
         String nyStilling = null;
 
