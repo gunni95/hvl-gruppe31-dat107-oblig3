@@ -23,7 +23,7 @@ public class Klient {
 		AnsattTekstgrensesnitt.skrivUt(anDAO, "Start.");
 
 		while (!done) {
-			String funksjonTxt = "Velg fuknsjon\n " +
+			String funksjonTxt = "Velg Kategori\n " +
 					"a) Ansatte\n " +
 					"b) Avdelinger\n " +
 					"c) Prosjekter\n " +
