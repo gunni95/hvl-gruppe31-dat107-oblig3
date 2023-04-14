@@ -98,7 +98,7 @@ public class ProsjektDAO implements ProsjektDAOInterface {
     @Override
     public List<Prosjekt> getMedlemmer(Integer id) {
         EntityManager em = emf.createEntityManager();
-        String jpqlQuery = "SELECT p FROM Deltakere as p WHERE p.id = :id";
+        String jpqlQuery = "SELECT p FROM prosjektdeltakelse as p WHERE p.id = :id";
 
         try {
             TypedQuery<Prosjekt> query = em.createQuery(jpqlQuery, Prosjekt.class).setParameter("id", id);

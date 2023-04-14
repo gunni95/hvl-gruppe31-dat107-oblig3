@@ -15,9 +15,9 @@ public class Prosjekt {
     private int TotaltTimeantall;
 
 
-    public Prosjekt(String ProsjektNavn, String ProsjektSjef){
+    public Prosjekt(String ProsjektNavn, String Beskrivelse){
         this.navn = ProsjektNavn;
-        this.beskrivelse = ProsjektSjef;
+        this.beskrivelse = Beskrivelse;
         this.TotaltTimeantall = 0;
     }
 

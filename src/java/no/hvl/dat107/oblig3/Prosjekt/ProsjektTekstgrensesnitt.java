@@ -1,15 +1,10 @@
 package no.hvl.dat107.oblig3.Prosjekt;
 
-import no.hvl.dat107.oblig3.Ansatt.Ansatt;
 import no.hvl.dat107.oblig3.Ansatt.AnsattDAOInterface;
-import no.hvl.dat107.oblig3.Avdeling.Avdeling;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface;
-import no.hvl.dat107.oblig3.Avdeling.AvdelingTekstgrensesnitt;
 import no.hvl.dat107.oblig3.Teksgrensesnitt;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
 
@@ -34,6 +29,8 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
                     done = true;
                     break;
                 case "a": // a) Legg til nytt prosjekt
+                    ProsjektTekstgrensesnitt.lagreProsjekt(prDAO);
+                    System.out.println("Ny avdeling lagt til.");
 
                     break;
                 case "b": // b) Registrere prosjektdeltakelse
@@ -49,7 +46,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         }
     }
 
-    public static Avdeling finnAvdelingMedNavn(no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface DAO) {
+    public static Prosjekt finnProsjektMedNavn(no.hvl.dat107.oblig3.Prosjekt.ProsjektDAO DAO) {
         Scanner input = new Scanner(System.in);
 
         String sokNavn = safeRead(() -> {
@@ -57,10 +54,10 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
             return input.nextLine();
         }, "Ikke gyldig søkeverdi");
 
-        return DAO.finnAvdelingMedNavn(sokNavn);
+        return DAO.finnProsjektMedNavn(sokNavn);
     }
 
-    public static Avdeling finnAvdelingMedId(no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface DAO) {
+    public static Prosjekt finnProsjektMedId(no.hvl.dat107.oblig3.Prosjekt.ProsjektDAO DAO) {
         Scanner input = new Scanner(System.in);
 
         int id = safeRead(() -> {
@@ -68,59 +65,34 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
             return Integer.parseInt(input.nextLine());
         }, "Ikke gyldig søkeverdi");
 
-        return DAO.finnAvdelingMedId(id);
+        return DAO.finnProsjektMedId(id);
     }
 
-    public static String hentAnsatteIAvdeling(no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface DAO) {
-        Scanner input = new Scanner(System.in);
+    public static Prosjekt lagreProsjekt(ProsjektDAOInterface DAO){
 
-        return safeRead(() -> {
-            System.out.print("Avdeling id: ");
-            int id = Integer.parseInt(input.nextLine());
-
-            List<Ansatt> ansattList = DAO.getAnsatte(id);
-            Avdeling avdeling = DAO.finnAvdelingMedId(id);
-
-            ansattList.sort((a, b) -> a.getBrukernavn().equals(avdeling.getAvdelingSjef()) ? -1 : a.getId() - b.getId() + 1);
-
-
-            String s = "\n" + ansattList.stream().map(Object::toString).collect(Collectors.joining("\nMedarbeider:\n"));
-            return s;
-        }, "Ikke gyldig avdeling");
-    }
-
-
-    public static Avdeling leggTilAvdeling(AvdelingDAOInterface DAO, AnsattDAOInterface anDAO){
-
-        String avdeling;
-        String sjefsBrukernavn;
+        String prosjekt;
+        String beskrivelse;
 
         Scanner input = new Scanner(System.in);
 
-        avdeling = safeRead(() -> {
-            System.out.println("Skriv inn nytt avdelingsnavn:");
+        prosjekt = safeRead(() -> {
+            System.out.println("Skriv inn nytt prosjekt navn:");
             String res = input.nextLine();
-            if(DAO.finnAvdelingMedNavn(res) != null){
-                throw new Exception("Avdelingsnavn er tatt");
+            if(DAO.finnProsjektMedNavn(res) != null){
+                throw new Exception("prosjekt navn er tatt");
             }
             return res;
         }, "Ikke gyldig navn");
 
-        sjefsBrukernavn = safeRead(() -> {
-            System.out.println("Skriv inn ny sjefbrukernavn:");
-            String sjef = input.nextLine();
-            Ansatt ansattInfo = anDAO.finnAnsattMedBrukernavn(sjef);
-            if(ansattInfo == null){
-                throw new Exception("Bruker finnes ikke");
-            }
-            if(anDAO.erSjef(ansattInfo.getId())){
-                throw new Exception("Allerede sjef i annen avdeling");
-            }
-            return sjef;
-        }, "Ikke gyldig navn");
+        beskrivelse = safeRead(() -> {
+            System.out.println("Skriv inn prosjekt beskrivelse");
+            String prosjektBeskrivelse = input.nextLine();
 
-        Avdeling nyAvdeling = new Avdeling(avdeling,sjefsBrukernavn);
-        DAO.lagreProsjekt(nyAvdeling);
-        return nyAvdeling;
+            return prosjektBeskrivelse;
+        }, "Ikke gyldig beskrivelse");
+
+        Prosjekt nyttProsjekt = new Prosjekt(prosjekt,beskrivelse);
+        DAO.lagreProsjekt(nyttProsjekt);
+        return nyttProsjekt;
     }
 }

@@ -61,9 +61,7 @@ public class Ansatt {
 	public Integer getAvdeling() {
 		return this.avdeling;
 	}
-	public void setAvdeling(Integer avdeling) {
-		this.avdeling = avdeling;
-	}
+	public void setAvdeling(Integer avdeling) { this.avdeling = avdeling; }
 	public String getStilling() {
 		return stilling;
 	}
