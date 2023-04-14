@@ -20,7 +20,11 @@ public class ProsjektdeltakelseDAO {
     public Prosjektdeltakelse getProsjektdeltakelse(Integer prosjektId, Integer ansattId) {
         EntityManager em = emf.createEntityManager();
 
-        return getProsjektdeltakelse(em, prosjektId, ansattId);
+        Prosjektdeltakelse result = getProsjektdeltakelse(em, prosjektId, ansattId);
+
+        em.close();
+
+        return result;
     }
 
     public Prosjektdeltakelse oppdaterProsjektdeltakelseRolle(Integer prosjektId, Integer ansattId, String nyRolle){
