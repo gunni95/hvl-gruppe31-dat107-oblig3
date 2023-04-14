@@ -110,6 +110,30 @@ public class AvdelingDAO implements AvdelingDAOInterface {
     }
 
     @Override
+    public String ansatteToString(Avdeling avdeling) throws Exception {
+        List<Ansatt> ansattList = this.getAnsatte(avdeling.getId());
+
+        if (ansattList == null) {
+            throw new Exception("Fant ingen avdeling");
+        }
+
+        return ansatteToString(ansattList, avdeling);
+    }
+
+    @Override
+    public String ansatteToString(List<Ansatt> ansattList, Avdeling avdeling) {
+        ansattList.sort((a, b) -> a.getBrukernavn().equals(avdeling.getAvdelingSjef()) ? -1 : a.getId() - b.getId() + 1);
+
+        StringBuilder result = new StringBuilder("Avdeling " + avdeling.getAvdelingNavn() + "Består av: \n" +
+                "Sjef: " + ansattList.get(0).toString());
+
+        for (int i = 1; i < ansattList.size(); i++) {
+            result.append("Medarneider: ").append(ansattList.get(i)).append("\n");
+        }
+        return result.toString();
+    }
+
+    @Override
     public void slettAvdeling(int id) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();

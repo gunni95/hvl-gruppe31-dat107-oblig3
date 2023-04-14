@@ -24,6 +24,9 @@ public interface AvdelingDAOInterface {
 
         List<Ansatt> getAnsatte(Integer id);
 
+        String ansatteToString(Avdeling avdeling) throws Exception;
+        String ansatteToString(List<Ansatt> ansattList, Avdeling avdeling);
+
 
         /** Delete - Slette en Avdeling-rad fra databasen */
         void slettAvdeling(int id);
