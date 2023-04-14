@@ -17,11 +17,11 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         boolean done = false;
 
         while (!done) {
-            String promptTekst = "Velg operasjon:" +
-                    " a) Legg til nytt prosjekt\n " +
+            String promptTekst = "Velg operasjon:\n" +
+                    " a) Legg til nytt prosjekt\n" +
                     " b) oppdater prosjekt\n" +
-                    " c) Registrere prosjektdeltakelse\n " +
-                    " d) Føre timer\n " +
+                    " c) Registrere prosjektdeltakelse\n" +
+                    " d) Føre timer\n" +
                     " e) Skrive ut prosjektinformasjon\n" +
                     " 0) Tilbake";
 
