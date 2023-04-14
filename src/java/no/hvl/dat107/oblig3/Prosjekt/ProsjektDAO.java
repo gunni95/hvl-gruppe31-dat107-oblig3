@@ -1,7 +1,12 @@
 package no.hvl.dat107.oblig3.Prosjekt;
 
 import jakarta.persistence.*;
+import no.hvl.dat107.oblig3.Ansatt.Ansatt;
+import no.hvl.dat107.oblig3.Ansatt.AnsattDAO;
+import no.hvl.dat107.oblig3.Prosjekt.Prosjektdeltakelse.Prosjektdeltakelse;
+import no.hvl.dat107.oblig3.Prosjekt.Prosjektdeltakelse.ProsjektdeltakelseDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProsjektDAO implements ProsjektDAOInterface {
@@ -96,16 +101,19 @@ public class ProsjektDAO implements ProsjektDAOInterface {
     }
 
     @Override
-    public List<Prosjekt> getMedlemmer(Integer id) {
-        EntityManager em = emf.createEntityManager();
-        String jpqlQuery = "SELECT p FROM prosjektdeltakelse as p WHERE p.id = :id";
+    public List<Ansatt> getMedlemmer(Integer prosjektId) {
+        ProsjektdeltakelseDAO pdDAO = new ProsjektdeltakelseDAO();
+        AnsattDAO anDAO = new AnsattDAO();
 
-        try {
-            TypedQuery<Prosjekt> query = em.createQuery(jpqlQuery, Prosjekt.class).setParameter("id", id);
-            return query.getResultList(); //Henter ut basert på spørring
-        } finally {
-            em.close();
+        List<Prosjektdeltakelse> res = pdDAO.getDeltakereIProsjekt(prosjektId);
+
+        List<Ansatt> result = new ArrayList<>();
+
+        for (Prosjektdeltakelse prosjektdeltakelse : res) {
+            result.add(anDAO.finnAnsattMedId(prosjektdeltakelse.getAnsattId()));
         }
+
+        return result;
     }
 
     public void leggTilTotalTimer(Integer id, Integer timer) {

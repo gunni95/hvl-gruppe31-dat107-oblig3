@@ -1,5 +1,7 @@
 package no.hvl.dat107.oblig3.Prosjekt;
 
+import no.hvl.dat107.oblig3.Ansatt.Ansatt;
+
 import java.util.List;
 
 public interface ProsjektDAOInterface {
@@ -20,7 +22,7 @@ public interface ProsjektDAOInterface {
         /** Update - Oppdatere en Prosjekt-rad i databasen */
         void oppdaterProsjekt(int id, String nyttProsjektNavn, String nySjef);
 
-        List<Prosjekt> getMedlemmer(Integer id);
+        List<Ansatt> getMedlemmer(Integer id);
 
 
         /** Delete - Slette en Prosjekt-rad fra databasen */

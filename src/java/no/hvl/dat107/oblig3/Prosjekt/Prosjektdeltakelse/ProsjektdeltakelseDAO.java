@@ -6,6 +6,8 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import no.hvl.dat107.oblig3.Prosjekt.ProsjektDAO;
 
+import java.util.List;
+
 public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
     private final EntityManagerFactory emf;
     public ProsjektdeltakelseDAO() {
@@ -45,6 +47,20 @@ public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
 
         return result;
     }
+
+    @Override
+    public List<Prosjektdeltakelse> getDeltakereIProsjekt(Integer prosjektId) {
+        EntityManager em = emf.createEntityManager();
+
+        List<Prosjektdeltakelse> prosjektdeltakelseList = em.createQuery(
+                        "SELECT a from Prosjektdeltakelse a WHERE a.prosjektId = :prosjektId", Prosjektdeltakelse.class).
+                setParameter("prosjektId", prosjektId).getResultList();
+
+        em.close();
+
+        return prosjektdeltakelseList;
+    }
+
     @Override
     public Prosjektdeltakelse oppdaterProsjektdeltakelseRolle(Integer prosjektId, Integer ansattId, String nyRolle){
         EntityManager em = emf.createEntityManager();
@@ -73,10 +89,12 @@ public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
         try{
             tx.begin();
             Prosjektdeltakelse l = getProsjektdeltakelse(em, prosjektId, ansattId);
-            l.setProsjekttimer(antallTimer);
+            if (antallTimer != null) {
+                l.setProsjekttimer(l.getProsjekttimer() + antallTimer);
 
-            ProsjektDAO prDAO = new ProsjektDAO();
-            prDAO.leggTilTotalTimer(l.getProsjektId(), antallTimer);
+                ProsjektDAO prDAO = new ProsjektDAO();
+                prDAO.leggTilTotalTimer(l.getProsjektId(), antallTimer);
+            }
             //unfin
             tx.commit();
         } catch(Throwable e){
