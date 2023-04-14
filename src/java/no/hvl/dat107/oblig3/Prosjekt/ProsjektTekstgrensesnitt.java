@@ -1,5 +1,6 @@
 package no.hvl.dat107.oblig3.Prosjekt;
 
+import no.hvl.dat107.oblig3.Ansatt.Ansatt;
 import no.hvl.dat107.oblig3.Ansatt.AnsattDAO;
 import no.hvl.dat107.oblig3.Ansatt.AnsattDAOInterface;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface;
@@ -166,19 +167,44 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         Scanner input = new Scanner(System.in);
 
         prosjektId = safeRead(() -> {
-            System.out.println("Skriv inn prosjek");
+            System.out.print("Prosjekt: ");
             String res = input.nextLine();
-            return prDAO.finnProsjektMedNavn(res).getId();
+            if (res.matches("^\\d+$")) {
+                Prosjekt funnet = prDAO.finnProsjektMedId(Integer.parseInt(res));
+
+                if (funnet != null) {
+                    return funnet.getId();
+                }
+            }
+
+            Prosjekt funnet = prDAO.finnProsjektMedNavn(res);
+
+            if (funnet == null) {
+                throw new Exception("Ingen prosjekt funnet");
+            }
+            return funnet.getId();
         }, "Ikke gyldig prosjekt");
 
         ansattId = safeRead(() -> {
-            System.out.println("Skriv inn navn på deltaker:");
+            System.out.print("Deltaker: ");
             String res = input.nextLine();
-            return anDAO.finnAnsattMedBrukernavn(res).getId();
+            if (res.matches("^\\d+$")) {
+                Ansatt funnet = anDAO.finnAnsattMedId(Integer.parseInt(res));
+
+                if (funnet != null) {
+                    return funnet.getId();
+                }
+            }
+            Ansatt funnet =  anDAO.finnAnsattMedBrukernavn(res);
+            if (funnet == null) {
+                throw new Exception("Ingen ansatt funnet");
+            }
+
+            return funnet.getId();
         }, "Ikke gyldig navn");
 
         timer = safeRead(() -> {
-            System.out.println("Skriv inn antall nye timer");
+            System.out.print("Antall nye timer: ");
 
             return Integer.parseInt(input.nextLine());
         }, "Ikke gyldig time Verdi");
