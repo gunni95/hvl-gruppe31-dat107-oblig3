@@ -143,6 +143,9 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         rolle = safeRead(() -> {
             System.out.println("Skriv inn deltaker sin rolle");
             String prosjektBeskrivelse = input.nextLine();
+            if (prosjektBeskrivelse.length() == 0) {
+                throw new Exception("Vennlight skriv en beskrivelse");
+            }
 
             return prosjektBeskrivelse;
         }, "Ikke gyldig rolle");
@@ -176,9 +179,8 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
 
         timer = safeRead(() -> {
             System.out.println("Skriv inn antall nye timer");
-            Integer antallTimer = Integer.parseInt(input.nextLine());
 
-            return antallTimer;
+            return Integer.parseInt(input.nextLine());
         }, "Ikke gyldig time Verdi");
 
         pdDAO.leggTilTimer(prosjektId, ansattId, timer);
