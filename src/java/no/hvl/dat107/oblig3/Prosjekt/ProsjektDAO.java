@@ -52,7 +52,7 @@ public class ProsjektDAO implements ProsjektDAOInterface {
 
         try {
             return em.createQuery(
-                            "SELECT a from Prosjekt a WHERE a.navn = :ProsjektNavn", Prosjekt.class).
+                            "SELECT a from Prosjekt a WHERE a.prosjektnavn = :ProsjektNavn", Prosjekt.class).
                     setParameter("ProsjektNavn", ProsjektNavn).getSingleResult(); //Henter ut på primærnøkkel
         } catch (NoResultException e){
             return null;
@@ -84,7 +84,7 @@ public class ProsjektDAO implements ProsjektDAOInterface {
 
             Prosjekt a = em.find(Prosjekt.class, id); //Finne rad som skal oppdateres
             if(nyttProsjektNavn != null) {
-                a.setNavn(nyttProsjektNavn);
+                a.setProsjektnavn(nyttProsjektNavn);
             }
             if(nySjef != null) {
                 a.setSjef(nySjef);

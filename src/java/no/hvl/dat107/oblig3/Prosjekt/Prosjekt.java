@@ -10,14 +10,14 @@ public class Prosjekt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String navn;
+    private String prosjektnavn;
     private String sjef;
     private String beskrivelse; // required og burde være en AnsattId
     private int totaltTimeantall;
 
 
     public Prosjekt(String prosjektNavn, String sjef, String beskrivelse){
-        this.navn = prosjektNavn;
+        this.prosjektnavn = prosjektNavn;
         this.sjef = sjef;
         this.beskrivelse = beskrivelse;
         this.totaltTimeantall = 0;
@@ -33,11 +33,11 @@ public class Prosjekt {
     public String getBeskrivelse() {
         return beskrivelse;
     }
-    public String getNavn(){
-        return this.navn;
+    public String getProsjektnavn(){
+        return this.prosjektnavn;
     }
-    public void setNavn(String ProsjektNavn){
-        this.navn = ProsjektNavn;
+    public void setProsjektnavn(String ProsjektNavn){
+        this.prosjektnavn = ProsjektNavn;
     }
     public String getSjef(){
         return this.beskrivelse;
@@ -56,7 +56,7 @@ public class Prosjekt {
     }
     @Override
     public String toString() {
-        return "Prosjektnavn: " + this.navn + "\n" +
+        return "Prosjektnavn: " + this.prosjektnavn + "\n" +
                 "Sjef: " + this.sjef + "\n" +
                 "Beskrivelse: " + this.beskrivelse + "\n" +
                 "Total timer: " + this.totaltTimeantall + "\n";
