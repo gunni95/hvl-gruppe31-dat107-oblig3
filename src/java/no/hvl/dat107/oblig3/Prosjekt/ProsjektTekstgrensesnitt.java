@@ -284,13 +284,13 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
                 return null;
             }
 
-            String b =  anDAO.finnAnsattMedBrukernavn(res).getBrukernavn();
+            Ansatt b =  anDAO.finnAnsattMedBrukernavn(res);
 
             if (b == null) {
                 throw new Exception("Ingen ansatt med dette brukernavnet");
             }
 
-            return b;
+            return b.getBrukernavn();
         }, "Ikke gyldig ansatt");
 
         beskrivelse = safeRead(() -> {
