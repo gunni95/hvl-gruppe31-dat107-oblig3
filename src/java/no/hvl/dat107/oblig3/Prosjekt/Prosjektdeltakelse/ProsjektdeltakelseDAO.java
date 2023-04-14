@@ -12,6 +12,24 @@ public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
         emf = Persistence.createEntityManagerFactory("oblig3PersistenceUnit");
     }
 
+    @Override
+    public void opprettProsjektdeltakelse(Prosjektdeltakelse p) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+            em.persist(p); //Oppretter en ny rad i databasen
+            tx.commit();
+
+        } catch (Throwable e) {
+            e.printStackTrace();
+            tx.rollback();
+        } finally {
+            em.close();
+        }
+    }
+
     private Prosjektdeltakelse getProsjektdeltakelse(EntityManager em, Integer prosjektId, Integer ansattId) {
         return em.createQuery(
                         "SELECT a from Prosjektdeltakelse a WHERE a.prosjektId = :prosjektId AND a.ansattId = :ansattId", Prosjektdeltakelse.class).
@@ -45,24 +63,6 @@ public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
             em.close();
         }
         return null;
-    }
-
-    @Override
-    public void opprettProsjektdeltakelse(Prosjektdeltakelse p) {
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        try {
-            tx.begin();
-            em.persist(p); //Oppretter en ny rad i databasen
-            tx.commit();
-
-        } catch (Throwable e) {
-            e.printStackTrace();
-            tx.rollback();
-        } finally {
-            em.close();
-        }
     }
 
     @Override
