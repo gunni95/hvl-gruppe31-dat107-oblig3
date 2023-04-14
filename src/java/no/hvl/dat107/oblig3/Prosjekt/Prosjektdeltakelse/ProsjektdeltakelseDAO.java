@@ -34,8 +34,8 @@ public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
 
     private Prosjektdeltakelse getProsjektdeltakelse(EntityManager em, Integer prosjektId, Integer ansattId) {
         return em.createQuery(
-                        "SELECT a from Prosjektdeltakelse a WHERE a.prosjektid = :prosjektid AND a.ansattid = :ansattid", Prosjektdeltakelse.class).
-                setParameter("prosjektid", prosjektId).setParameter("ansattid", ansattId).getSingleResult();
+                        "SELECT a from Prosjektdeltakelse a WHERE a.prosjektid = :prosjektid", Prosjektdeltakelse.class).
+                setParameter("prosjektid", prosjektId).getSingleResult();
     }
     @Override
     public Prosjektdeltakelse getProsjektdeltakelse(Integer prosjektId, Integer ansattId) {
