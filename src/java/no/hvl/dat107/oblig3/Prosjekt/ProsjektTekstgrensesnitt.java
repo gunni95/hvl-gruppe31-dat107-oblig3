@@ -252,12 +252,19 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
             System.out.print("Prosjekt til redigering: ");
             String res = input.nextLine();
             if (res.matches("^\\d+$")) {
-                Prosjekt funnet =  prDAO.finnProsjektMedId(Integer.parseInt(res));
+                Prosjekt funnet = prDAO.finnProsjektMedId(Integer.parseInt(res));
+
                 if (funnet != null) {
                     return funnet.getId();
                 }
             }
-            return prDAO.finnProsjektMedNavn(res).getId();
+
+            Prosjekt funnet = prDAO.finnProsjektMedNavn(res);
+
+            if (funnet == null) {
+                throw new Exception("Ingen prosjekt funnet");
+            }
+            return funnet.getId();
         }, "Ikke gyldig prosjekt");
 
         prosjektNavn = safeRead(() -> {
