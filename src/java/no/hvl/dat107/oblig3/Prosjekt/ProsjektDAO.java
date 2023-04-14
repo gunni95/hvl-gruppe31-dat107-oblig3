@@ -113,7 +113,7 @@ public class ProsjektDAO implements ProsjektDAOInterface {
         List<Ansatt> result = new ArrayList<>();
 
         for (Prosjektdeltakelse prosjektdeltakelse : res) {
-            result.add(anDAO.finnAnsattMedId(prosjektdeltakelse.getAnsattId()));
+            result.add(anDAO.finnAnsattMedId(prosjektdeltakelse.getAnsattid()));
         }
 
         return result;
