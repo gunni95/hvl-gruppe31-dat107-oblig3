@@ -43,7 +43,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
                     break;
 
                 case "c": // c) Registrere prosjektdeltakelse
-                    ProsjektTekstgrensesnitt.leggTilDeltaker(prDAO);
+                    ProsjektTekstgrensesnitt.leggTilDeltaker(prDAO, pdDAO);
                     System.out.println("Ny prosjekt deltaker lagt til.");
                     break;
 
@@ -126,7 +126,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         pdDAO.opprettProsjektdeltakelse(sjefEntry);
         return nyttProsjekt;
     }
-    public static void leggTilDeltaker(ProsjektDAOInterface DAO){
+    public static void leggTilDeltaker(ProsjektDAOInterface DAO, ProsjektdeltakelseDAO pdDAO){
 
         ProsjektDAO prDAO = new ProsjektDAO();
         AnsattDAO anDAO = new AnsattDAO();
@@ -169,6 +169,11 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
             Ansatt funnet =  anDAO.finnAnsattMedBrukernavn(res);
             if (funnet == null) {
                 throw new Exception("Ingen ansatt funnet");
+            }
+
+            Prosjektdeltakelse prosjektdeltakelse = pdDAO.getProsjektdeltakelse(prosjektId, funnet.getId());
+            if (prosjektdeltakelse != null) {
+                throw new Exception("Kan ikke legge til en ansatt som allerede er lagt til");
             }
 
             return funnet.getId();
