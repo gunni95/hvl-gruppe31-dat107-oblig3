@@ -101,7 +101,8 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         sjef = safeRead(() -> {
             System.out.print("Sjef: ");
             String res = input.nextLine();
-            if (anDAO.finnAnsattMedBrukernavn(res) == null) {
+            Ansatt funnet = anDAO.finnAnsattMedBrukernavn(res);
+            if (funnet == null) {
                 throw new Exception("finner ingen ansatt med dette brukernanvnet");
             }
             return res;
