@@ -35,6 +35,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
                     break;
                 case "b": // b) Registrere prosjektdeltakelse
 
+
                     break;
                 case "c": // c) Føre timer
 

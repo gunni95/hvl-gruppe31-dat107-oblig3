@@ -108,6 +108,28 @@ public class ProsjektDAO implements ProsjektDAOInterface {
         }
     }
 
+    public void leggTilTotalTimer(Integer id, Integer timer) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+
+            Prosjekt a = em.find(Prosjekt.class, id); //Finne rad som skal oppdateres
+            if(timer != null) {
+                a.setTotaltTimeantall(timer);
+            }
+
+            tx.commit();
+
+        } catch (Throwable e) {
+            e.printStackTrace();
+            tx.rollback();
+        } finally {
+            em.close();
+        }
+    }
+
     @Override
     public void slettProsjekt(int id) {
         EntityManager em = emf.createEntityManager();

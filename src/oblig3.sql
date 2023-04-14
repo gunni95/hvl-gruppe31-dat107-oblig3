@@ -31,7 +31,8 @@ CREATE TABLE prosjektdeltakelse(
                                    Rolle char(20) NOT NULL,
                                    Prosjekttimer integer,
                                    ansattid integer,
-                                   foreign key (ansattid) REFERENCES ansatt(Id)
+                                   foreign key (ansattid) REFERENCES ansatt(Id),
+                                   primary key (prosjektid, ansattId)
 );
 
 INSERT INTO avdeling(navn)

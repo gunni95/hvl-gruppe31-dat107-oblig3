@@ -4,5 +4,5 @@ public interface ProsjektdeltakelseDAOInterface {
     /** Update - Oppdater rolle*/
     void oppdaterProsjektdeltakelseRolle(int id, String nyRolle);
     /** Update - Før inn timer*/
-    void addTimer(int timer);
+    void addTimer(int id, int timer);
 }
