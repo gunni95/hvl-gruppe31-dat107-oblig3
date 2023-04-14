@@ -33,7 +33,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
                     done = true;
                     break;
                 case "a": // a) Legg til nytt prosjekt
-                    ProsjektTekstgrensesnitt.lagreProsjekt(prDAO, anDAO);
+                    ProsjektTekstgrensesnitt.opprettProsjekt(prDAO, anDAO);
                     System.out.println("Ny avdeling lagt til.");
                     break;
                 case "b": // b) Skrive ut prosjektinformasjon
@@ -82,7 +82,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         return DAO.finnProsjektMedId(id);
     }
 
-    public static Prosjekt lagreProsjekt(ProsjektDAOInterface prDAO, AnsattDAOInterface anDAO){
+    public static Prosjekt opprettProsjekt(ProsjektDAOInterface prDAO, AnsattDAOInterface anDAO){
 
         String prosjekt;
         String sjef;
