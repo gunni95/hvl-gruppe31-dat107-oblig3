@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
 
-    public static void prosjektGrensesnitt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO, ProsjektDAOInterface prDAO) {
+    public static void prosjektGrensesnitt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO, ProsjektDAOInterface prDAO, ProsjektdeltakelseDAO pdDAO) {
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
 
@@ -34,7 +34,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
                     done = true;
                     break;
                 case "a": // a) Legg til nytt prosjekt
-                    ProsjektTekstgrensesnitt.opprettProsjekt(prDAO, anDAO);
+                    ProsjektTekstgrensesnitt.opprettProsjekt(prDAO, anDAO, pdDAO);
                     System.out.println("Ny avdeling lagt til.");
                     break;
                 case "b": // b) oppdater prosjekt
@@ -81,7 +81,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         return DAO.finnProsjektMedId(id);
     }
 
-    public static Prosjekt opprettProsjekt(ProsjektDAOInterface prDAO, AnsattDAOInterface anDAO){
+    public static Prosjekt opprettProsjekt(ProsjektDAOInterface prDAO, AnsattDAOInterface anDAO, ProsjektdeltakelseDAO pdDAO){
 
         String prosjekt;
         String sjef;
@@ -108,6 +108,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
             return res;
         }, "Ikke gyldig sjef");
 
+
         beskrivelse = safeRead(() -> {
             System.out.print("beskrivelse: ");
             String prosjektBeskrivelse = input.nextLine();
@@ -121,6 +122,8 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
 
         Prosjekt nyttProsjekt = new Prosjekt(prosjekt, sjef, beskrivelse);
         prDAO.lagreProsjekt(nyttProsjekt);
+        Prosjektdeltakelse sjefEntry = new Prosjektdeltakelse(prDAO.finnProsjektMedNavn(prosjekt).getId(), anDAO.finnAnsattMedBrukernavn(sjef).getId(), "sjef");
+        pdDAO.opprettProsjektdeltakelse(sjefEntry);
         return nyttProsjekt;
     }
     public static void leggTilDeltaker(ProsjektDAOInterface DAO){

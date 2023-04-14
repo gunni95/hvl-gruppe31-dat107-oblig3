@@ -7,6 +7,7 @@ import no.hvl.dat107.oblig3.Avdeling.AvdelingDAO;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingTekstgrensesnitt;
 import no.hvl.dat107.oblig3.Prosjekt.ProsjektDAO;
 import no.hvl.dat107.oblig3.Prosjekt.ProsjektTekstgrensesnitt;
+import no.hvl.dat107.oblig3.Prosjekt.Prosjektdeltakelse.ProsjektdeltakelseDAO;
 
 import java.util.Scanner;
 
@@ -14,8 +15,9 @@ public class Klient {
 
 	private static final AnsattDAOInterface anDAO = new AnsattDAO();
 	private static final AvdelingDAO avDAO = new AvdelingDAO();
-
 	private static final ProsjektDAO prDAO = new ProsjektDAO();
+	private static final ProsjektdeltakelseDAO pdDAO = new ProsjektdeltakelseDAO();
+
 	public static void main(String[] args) {
 		boolean done = false;
 		Scanner input = new Scanner(System.in);
@@ -45,7 +47,7 @@ public class Klient {
 					AvdelingTekstgrensesnitt.avdelingGrensesnitt(avDAO, anDAO);
 					break;
 				case "c":
-					ProsjektTekstgrensesnitt.prosjektGrensesnitt(avDAO, anDAO, prDAO);
+					ProsjektTekstgrensesnitt.prosjektGrensesnitt(avDAO, anDAO, prDAO, pdDAO);
 					break;
 			}
 		}

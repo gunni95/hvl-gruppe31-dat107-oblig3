@@ -2,6 +2,7 @@ package no.hvl.dat107.oblig3.Avdeling;
 
 import no.hvl.dat107.oblig3.Ansatt.Ansatt;
 import no.hvl.dat107.oblig3.Ansatt.AnsattDAOInterface;
+import no.hvl.dat107.oblig3.Prosjekt.Prosjektdeltakelse.Prosjektdeltakelse;
 import no.hvl.dat107.oblig3.Teksgrensesnitt;
 
 import java.util.List;
