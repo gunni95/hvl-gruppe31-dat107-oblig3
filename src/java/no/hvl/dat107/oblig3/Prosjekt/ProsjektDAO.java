@@ -16,13 +16,13 @@ public class ProsjektDAO implements ProsjektDAOInterface {
     }
 
     @Override
-    public void lagreProsjekt(Prosjekt a) {
+    public void lagreProsjekt(Prosjekt prosjekt) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             tx.begin();
-            em.persist(a); //Oppretter en ny rad i databasen
+            em.persist(prosjekt); //Oppretter en ny rad i databasen
             tx.commit();
 
         } catch (Throwable e) {
@@ -82,15 +82,15 @@ public class ProsjektDAO implements ProsjektDAOInterface {
         try {
             tx.begin();
 
-            Prosjekt a = em.find(Prosjekt.class, id); //Finne rad som skal oppdateres
+            Prosjekt prosjekt = em.find(Prosjekt.class, id); //Finne rad som skal oppdateres
             if(nyttProsjektNavn != null) {
-                a.setProsjektnavn(nyttProsjektNavn);
+                prosjekt.setProsjektnavn(nyttProsjektNavn);
             }
             if(nySjef != null) {
-                a.setSjef(nySjef);
+                prosjekt.setSjef(nySjef);
             }
             if (nyBeskrivelse != null) {
-                a.setBeskrivelse(nyBeskrivelse);
+                prosjekt.setBeskrivelse(nyBeskrivelse);
             }
 
             tx.commit();
@@ -126,9 +126,9 @@ public class ProsjektDAO implements ProsjektDAOInterface {
         try {
             tx.begin();
 
-            Prosjekt a = em.find(Prosjekt.class, id); //Finne rad som skal oppdateres
+            Prosjekt prosjekt = em.find(Prosjekt.class, id); //Finne rad som skal oppdateres
             if(timer != null) {
-                a.setTimetall(timer);
+                prosjekt.setTimetall(prosjekt.getTimetall() + timer);
             }
 
             tx.commit();
@@ -154,8 +154,8 @@ public class ProsjektDAO implements ProsjektDAOInterface {
         try {
             tx.begin();
 
-            Prosjekt a = em.find(Prosjekt.class, id); //Finne rad som skal slettes
-            em.remove(a); //Slette rad som tilsvarer managed oject a
+            Prosjekt prosjekt = em.find(Prosjekt.class, id); //Finne rad som skal slettes
+            em.remove(prosjekt); //Slette rad som tilsvarer managed oject a
 
             tx.commit();
 

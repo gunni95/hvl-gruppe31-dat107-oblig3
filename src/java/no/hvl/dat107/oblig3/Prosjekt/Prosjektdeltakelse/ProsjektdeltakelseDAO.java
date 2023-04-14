@@ -1,9 +1,6 @@
 package no.hvl.dat107.oblig3.Prosjekt.Prosjektdeltakelse;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
 import no.hvl.dat107.oblig3.Prosjekt.ProsjektDAO;
 
 import java.util.List;
@@ -33,9 +30,13 @@ public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
     }
 
     private Prosjektdeltakelse getProsjektdeltakelse(EntityManager em, Integer prosjektId, Integer ansattId) {
-        return em.createQuery(
-                        "SELECT a from Prosjektdeltakelse a WHERE a.prosjektid = :prosjektid AND a.ansattid = :ansattid", Prosjektdeltakelse.class).
-                setParameter("prosjektid", prosjektId).setParameter("ansattid", ansattId).getSingleResult();
+        try {
+            return em.createQuery(
+                            "SELECT a from Prosjektdeltakelse a WHERE a.prosjektid = :prosjektid AND a.ansattid = :ansattid", Prosjektdeltakelse.class).
+                    setParameter("prosjektid", prosjektId).setParameter("ansattid", ansattId).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
     @Override
     public Prosjektdeltakelse getProsjektdeltakelse(Integer prosjektId, Integer ansattId) {
@@ -89,6 +90,10 @@ public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
         try{
             tx.begin();
             Prosjektdeltakelse l = getProsjektdeltakelse(em, prosjektId, ansattId);
+            if (l == null) {
+                throw new Exception("Ansatt er ikke registrert i prosjekt");
+            }
+
             if (antallTimer != null) {
                 l.setProsjekttimer(l.getProsjekttimer() + antallTimer);
 

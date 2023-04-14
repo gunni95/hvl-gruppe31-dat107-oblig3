@@ -17,9 +17,9 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
 
         while (!done) {
             String promptTekst = "Velg operasjon:" +
-                    " a) Finn avdeling\n " +
-                    " b) Hent ansatt i avdeling\n " +
-                    " c) Legg til ny avdeling\n " +
+                    " a) Finn avdeling\n" +
+                    " b) Hent ansatt i avdeling\n" +
+                    " c) Legg til ny avdeling\n" +
                     " 0) Tilbake";
 
             System.out.println(promptTekst);
@@ -34,7 +34,7 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
                     System.out.println("Avdeling: " + AvdelingTekstgrensesnitt.finnAvdelingMedId(avDAO));
                     break;
                 case "b": // b) Hent ansatt i avdeling
-                    System.out.println("\nAvdeling består av: \n\nSjef:" + AvdelingTekstgrensesnitt.hentAnsatteIAvdeling(avDAO));
+                    System.out.println(AvdelingTekstgrensesnitt.hentAnsatteIAvdeling(avDAO));
                     break;
                 case "c": // c) Legg til ny avdeling
                     AvdelingTekstgrensesnitt.leggTilAvdeling(avDAO,anDAO);
@@ -70,17 +70,26 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
         Scanner input = new Scanner(System.in);
 
         return safeRead(() -> {
-            System.out.print("Avdeling id: ");
-            int id = Integer.parseInt(input.nextLine());
+            System.out.print("Avdeling: ");
+            String res = input.nextLine();
+            List<Ansatt> ansattList;
+            Avdeling avdeling;
 
-            List<Ansatt> ansattList = DAO.getAnsatte(id);
-            Avdeling avdeling = DAO.finnAvdelingMedId(id);
+            if (res.matches("^\\d+$")) {
+                ;
+                avdeling = DAO.finnAvdelingMedId(Integer.parseInt(res));
+                ansattList = DAO.getAnsatte(Integer.parseInt(res));
+            } else {
+                avdeling = DAO.finnAvdelingMedNavn(res);
+                ansattList = DAO.getAnsatte(avdeling.getId());
+            }
 
-            ansattList.sort((a, b) -> a.getBrukernavn().equals(avdeling.getAvdelingSjef()) ? -1 : a.getId() - b.getId() + 1);
+            if (avdeling == null) {
+                throw new Exception("Fant ingen avdeling");
+            }
 
 
-            String s = "\n" + ansattList.stream().map(Object::toString).collect(Collectors.joining("\nMedarbeider:\n"));
-            return s;
+            return DAO.ansatteToString(ansattList, avdeling);
         }, "Ikke gyldig avdeling");
     }
 
@@ -117,7 +126,6 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
         Avdeling nyAvdeling = new Avdeling(avdeling,sjefsBrukernavn);
         DAO.opprettProsjekt(nyAvdeling);
 
-        String s = nyAvdeling.toString();
-        return s;
+        return nyAvdeling.toString();
     }
 }
