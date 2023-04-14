@@ -8,7 +8,7 @@ import java.util.List;
 public class AvdelingDAO implements AvdelingDAOInterface {
     private final EntityManagerFactory emf;
     public AvdelingDAO() {
-        emf = Persistence.createEntityManagerFactory("ansattPersistenceUnit");
+        emf = Persistence.createEntityManagerFactory("oblig3PersistenceUnit");
     }
 
     @Override

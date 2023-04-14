@@ -7,7 +7,7 @@ import java.util.List;
 public class ProsjektDAO implements ProsjektDAOInterface {
     private final EntityManagerFactory emf;
     public ProsjektDAO() {
-        emf = Persistence.createEntityManagerFactory("ansattPersistenceUnit");
+        emf = Persistence.createEntityManagerFactory("oblig3PersistenceUnit");
     }
 
     @Override

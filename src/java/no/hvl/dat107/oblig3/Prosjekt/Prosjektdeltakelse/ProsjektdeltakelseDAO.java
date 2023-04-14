@@ -4,23 +4,32 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import no.hvl.dat107.oblig3.Avdeling.Avdeling;
 import no.hvl.dat107.oblig3.Prosjekt.ProsjektDAO;
 
 public class ProsjektdeltakelseDAO {
     private final EntityManagerFactory emf;
     public ProsjektdeltakelseDAO() {
-        emf = Persistence.createEntityManagerFactory("ansattPersistenceUnit");
+        emf = Persistence.createEntityManagerFactory("oblig3PersistenceUnit");
     }
-    public Avdeling oppdaterProsjektdeltakelseRolle(int ansattid, int prosjektId, String nyRolle){
+
+    private Prosjektdeltakelse getProsjektdeltakelse(EntityManager em, Integer prosjektId, Integer ansattId) {
+        return em.createQuery(
+                        "SELECT a from Prosjektdeltakelse a WHERE a.prosjektId = :prosjektId AND a.ansattId = :ansattId", Prosjektdeltakelse.class).
+                setParameter("prosjektId", prosjektId).setParameter("ansattId", ansattId).getSingleResult();
+    }
+    public Prosjektdeltakelse getProsjektdeltakelse(Integer prosjektId, Integer ansattId) {
+        EntityManager em = emf.createEntityManager();
+
+        return getProsjektdeltakelse(em, prosjektId, ansattId);
+    }
+
+    public Prosjektdeltakelse oppdaterProsjektdeltakelseRolle(Integer prosjektId, Integer ansattId, String nyRolle){
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try{
             tx.begin();
-            Prosjektdeltakelse l = em.createQuery(
-                            "SELECT a from Prosjektdeltakelse a WHERE a.prosjektId = :prosjektId AND a.ansattId = :ansattId", Prosjektdeltakelse.class).
-                    setParameter("prosjektId", prosjektId).setParameter("ansattId", ansattid).getSingleResult();
+            Prosjektdeltakelse l = getProsjektdeltakelse(em, prosjektId, ansattId);
             l.setRolle(nyRolle);
             //unfin
             tx.commit();
@@ -32,13 +41,14 @@ public class ProsjektdeltakelseDAO {
         }
         return null;
     }
-    public void leggTilTimer(int ansattId, int antallTimer){
+    public void leggTilTimer(Integer prosjektId, Integer ansattId, Integer antallTimer){
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();;
 
         try{
             tx.begin();
-            Prosjektdeltakelse l = em.find(Prosjektdeltakelse.class, ansattId);
+            Prosjektdeltakelse l = getProsjektdeltakelse(em, prosjektId, ansattId);
+            l.setProsjekttimer(antallTimer);
 
             ProsjektDAO prDAO = new ProsjektDAO();
             prDAO.leggTilTotalTimer(l.getProsjektId(), antallTimer);

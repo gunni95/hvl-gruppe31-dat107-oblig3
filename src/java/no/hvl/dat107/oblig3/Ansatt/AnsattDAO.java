@@ -11,7 +11,7 @@ public class AnsattDAO implements AnsattDAOInterface {
 	private final EntityManagerFactory emf;
 	
 	public AnsattDAO() {
-		this.emf = Persistence.createEntityManagerFactory("ansattPersistenceUnit");
+		this.emf = Persistence.createEntityManagerFactory("oblig3PersistenceUnit");
 	}
 	
 	@Override

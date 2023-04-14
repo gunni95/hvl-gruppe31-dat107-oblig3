@@ -5,8 +5,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(schema = "oblig3", name = "Prosjektdeltakelse")
 public class Prosjektdeltakelse {
-
+    @Id
     private Integer prosjektId;
+    @Id
     private Integer ansattId;
     private String rolle;
     private int prosjekttimer;
@@ -22,16 +23,15 @@ public class Prosjektdeltakelse {
 
     }
 
+    public String getId() {
+        return this.prosjektId.toString() + this.ansattId.toString();
+    }
     public Integer getProsjektId() {
         return prosjektId;
     }
 
     public Integer getAnsattId() {
         return ansattId;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public String getRolle(){
