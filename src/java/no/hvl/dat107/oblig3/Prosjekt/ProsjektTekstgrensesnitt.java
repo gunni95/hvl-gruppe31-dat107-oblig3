@@ -17,11 +17,11 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         boolean done = false;
 
         while (!done) {
-            String promptTekst = "Velg operasjon:" +
-                    " a) Legg til nytt prosjekt\n " +
+            String promptTekst = "Velg operasjon:\n" +
+                    " a) Legg til nytt prosjekt\n" +
                     " b) oppdater prosjekt\n" +
-                    " c) Registrere prosjektdeltakelse\n " +
-                    " d) Føre timer\n " +
+                    " c) Registrere prosjektdeltakelse\n" +
+                    " d) Føre timer\n" +
                     " e) Skrive ut prosjektinformasjon\n" +
                     " 0) Tilbake";
 
@@ -90,7 +90,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         Scanner input = new Scanner(System.in);
 
         prosjekt = safeRead(() -> {
-            System.out.print("Prosjekt navn:");
+            System.out.print("Prosjekt navn: ");
             String res = input.nextLine();
             if(prDAO.finnProsjektMedNavn(res) != null){
                 throw new Exception("prosjekt navn er tatt");
@@ -110,6 +110,10 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         beskrivelse = safeRead(() -> {
             System.out.println("Skriv inn prosjekt beskrivelse");
             String prosjektBeskrivelse = input.nextLine();
+
+            if (prosjektBeskrivelse.length() == 0) {
+                throw new Exception("Vennlight fyll inn en beskrivelse");
+            }
 
             return prosjektBeskrivelse;
         }, "Ikke gyldig beskrivelse");
