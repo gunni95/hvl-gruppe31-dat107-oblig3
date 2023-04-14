@@ -36,24 +36,22 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
                     ProsjektTekstgrensesnitt.opprettProsjekt(prDAO, anDAO);
                     System.out.println("Ny avdeling lagt til.");
                     break;
-                case "b": // b) Skrive ut prosjektinformasjon
+                case "b": // b) oppdater prosjekt
                     ProsjektTekstgrensesnitt.oppdaterProsjekt(prDAO);
                     System.out.println("Prosjekt oppdatert");
                     break;
 
-                case "c": // b) Registrere prosjektdeltakelse
+                case "c": // c) Registrere prosjektdeltakelse
                     ProsjektTekstgrensesnitt.leggTilDeltaker(prDAO);
                     System.out.println("Ny prosjekt deltaker lagt til.");
                     break;
-                case "d": // c) Føre timer
+
+                case "d": // d) Føre timer
                     ProsjektTekstgrensesnitt.leggTilTimer(prDAO);
-                    System.out.println("Nye timer lagt til.");
-
                     break;
-                case "e": // e) Skriv ut prosjekt informasjon
-                    ProsjektTekstgrensesnitt.skrivUtBeskrivelse(prDAO);
-                    System.out.println("Nye timer lagt til.");
 
+                case "e": // e) Skriv ut prosjekt informasjon
+                    System.out.println(ProsjektTekstgrensesnitt.skrivUtBeskrivelse(prDAO));
                     break;
 
             }
@@ -145,6 +143,9 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         rolle = safeRead(() -> {
             System.out.println("Skriv inn deltaker sin rolle");
             String prosjektBeskrivelse = input.nextLine();
+            if (prosjektBeskrivelse.length() == 0) {
+                throw new Exception("Vennlight skriv en beskrivelse");
+            }
 
             return prosjektBeskrivelse;
         }, "Ikke gyldig rolle");
@@ -178,9 +179,8 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
 
         timer = safeRead(() -> {
             System.out.println("Skriv inn antall nye timer");
-            Integer antallTimer = Integer.parseInt(input.nextLine());
 
-            return antallTimer;
+            return Integer.parseInt(input.nextLine());
         }, "Ikke gyldig time Verdi");
 
         pdDAO.leggTilTimer(prosjektId, ansattId, timer);
@@ -249,18 +249,17 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         prDAO.oppdaterProsjekt(prosjektId, prosjektNavn, nySjef, beskrivelse);
     }
     public static Prosjekt skrivUtBeskrivelse(ProsjektDAOInterface DAO){
-
-        String prosjekt;
-
         Scanner input = new Scanner(System.in);
 
-        prosjekt = safeRead(() -> {
+        return safeRead(() -> {
             System.out.println("Skriv inn prosjekt navn:");
             String res = input.nextLine();
-            if(DAO.finnProsjektMedNavn(res) == null){
+            Prosjekt funnet = DAO.finnProsjektMedNavn(res);
+            if(funnet == null){
                 throw new Exception("prosjekte eksisterer ikke");
             }
-            return DAO.finnProsjektMedNavn(res).getProsjektInfo;
+
+            return funnet;
         }, "Ikke gyldig navn");
     }
 }
