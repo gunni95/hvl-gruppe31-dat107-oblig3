@@ -75,7 +75,7 @@ public class ProsjektDAO implements ProsjektDAOInterface {
     }
 
     @Override
-    public void oppdaterProsjekt(int id, String nyttProsjektNavn, String nySjef) {
+    public void oppdaterProsjekt(int id, String nyttProsjektNavn, String nySjef, String nyBeskrivelse) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -88,6 +88,9 @@ public class ProsjektDAO implements ProsjektDAOInterface {
             }
             if(nySjef != null) {
                 a.setProsjektSjef(nySjef);
+            }
+            if (nyBeskrivelse != null) {
+                a.setBeskrivelse(nyBeskrivelse);
             }
 
             tx.commit();

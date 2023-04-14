@@ -20,7 +20,7 @@ public interface ProsjektDAOInterface {
 
 
         /** Update - Oppdatere en Prosjekt-rad i databasen */
-        void oppdaterProsjekt(int id, String nyttProsjektNavn, String nySjef);
+        void oppdaterProsjekt(int id, String nyttProsjektNavn, String nySjef, String nyBeskrivelse);
 
         List<Ansatt> getMedlemmer(Integer id);
 

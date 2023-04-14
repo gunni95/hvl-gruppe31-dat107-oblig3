@@ -25,6 +25,18 @@ public class Prosjekt {
 
     }
 
+    public void setBeskrivelse(String beskrivelse) {
+        this.beskrivelse = beskrivelse;
+    }
+    public String getBeskrivelse() {
+        return beskrivelse;
+    }
+    public String getNavn() {
+        return navn;
+    }
+    public void setNavn(String navn) {
+        this.navn = navn;
+    }
     public String getProsjektNavn(){
         return this.navn;
     }
