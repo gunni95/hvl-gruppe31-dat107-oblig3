@@ -108,7 +108,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         }, "Ikke gyldig sjef");
 
         beskrivelse = safeRead(() -> {
-            System.out.println("Skriv inn prosjekt beskrivelse");
+            System.out.print("beskrivelse: ");
             String prosjektBeskrivelse = input.nextLine();
 
             if (prosjektBeskrivelse.length() == 0) {

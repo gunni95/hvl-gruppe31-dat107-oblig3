@@ -6,32 +6,32 @@ import jakarta.persistence.*;
 @Table(schema = "oblig3", name = "Prosjektdeltakelse")
 public class Prosjektdeltakelse {
     @Id
-    private Integer prosjektId;
+    private Integer prosjektid;
     @Id
-    private Integer ansattId;
+    private Integer ansattid;
     private String rolle;
     private int prosjekttimer;
 
     public Prosjektdeltakelse(){
 
     }
-    public Prosjektdeltakelse(Integer prosjektId, Integer ansattId, String rolle){
-        this.prosjektId = prosjektId;
-        this.ansattId = ansattId;
+    public Prosjektdeltakelse(Integer prosjektid, Integer ansattid, String rolle){
+        this.prosjektid = prosjektid;
+        this.ansattid = ansattid;
         this.rolle = rolle;
         this.prosjekttimer = 0;
 
     }
 
     public String getId() {
-        return this.prosjektId.toString() + this.ansattId.toString();
+        return this.prosjektid.toString() + this.ansattid.toString();
     }
-    public Integer getProsjektId() {
-        return prosjektId;
+    public Integer getProsjektid() {
+        return prosjektid;
     }
 
-    public Integer getAnsattId() {
-        return ansattId;
+    public Integer getAnsattid() {
+        return ansattid;
     }
 
     public String getRolle(){

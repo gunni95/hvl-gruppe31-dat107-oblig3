@@ -34,7 +34,7 @@ public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
 
     private Prosjektdeltakelse getProsjektdeltakelse(EntityManager em, Integer prosjektId, Integer ansattId) {
         return em.createQuery(
-                        "SELECT a from Prosjektdeltakelse a WHERE a.prosjektId = :prosjektId AND a.ansattId = :ansattId", Prosjektdeltakelse.class).
+                        "SELECT a from Prosjektdeltakelse a WHERE a.prosjektid = :prosjektId AND a.ansattid = :ansattId", Prosjektdeltakelse.class).
                 setParameter("prosjektId", prosjektId).setParameter("ansattId", ansattId).getSingleResult();
     }
     @Override
@@ -53,7 +53,7 @@ public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
         EntityManager em = emf.createEntityManager();
 
         List<Prosjektdeltakelse> prosjektdeltakelseList = em.createQuery(
-                        "SELECT a from Prosjektdeltakelse a WHERE a.prosjektId = :prosjektId", Prosjektdeltakelse.class).
+                        "SELECT a from Prosjektdeltakelse a WHERE a.prosjektid = :prosjektId", Prosjektdeltakelse.class).
                 setParameter("prosjektId", prosjektId).getResultList();
 
         em.close();
@@ -93,7 +93,7 @@ public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
                 l.setProsjekttimer(l.getProsjekttimer() + antallTimer);
 
                 ProsjektDAO prDAO = new ProsjektDAO();
-                prDAO.leggTilTotalTimer(l.getProsjektId(), antallTimer);
+                prDAO.leggTilTotalTimer(l.getProsjektid(), antallTimer);
             }
             //unfin
             tx.commit();
