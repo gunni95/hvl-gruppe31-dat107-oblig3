@@ -56,10 +56,7 @@ public class Prosjekt {
     }
     @Override
     public String toString() {
-        return "Prosjektnavn: " + this.prosjektnavn + "\n" +
-                "Sjef: " + this.sjef + "\n" +
-                "Beskrivelse: " + this.beskrivelse + "\n" +
-                "Total timer: " + this.timetall + "\n";
+        return String.format("Prosjektnavn: id=%1$s, \nsjef: %2$s, \nBeskrivelse = %3$s, \nTotal timer = %4$d\n", this.prosjektnavn, this.sjef, this.beskrivelse, this.timetall);
     }
 
 }

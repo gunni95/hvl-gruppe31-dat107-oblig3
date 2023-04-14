@@ -3,7 +3,7 @@ package no.hvl.dat107.oblig3.Prosjekt.Prosjektdeltakelse;
 import jakarta.persistence.*;
 
 @Entity
-@Table(schema = "oblig3", name = "Prosjektdeltakelse")
+@Table(schema = "oblig3", name = "prosjektdeltakelse")
 public class Prosjektdeltakelse {
     @Id
     private Integer prosjektid;
