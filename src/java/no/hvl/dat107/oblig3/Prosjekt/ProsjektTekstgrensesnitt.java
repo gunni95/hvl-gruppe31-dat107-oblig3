@@ -29,7 +29,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
                     done = true;
                     break;
                 case "a": // a) Legg til nytt prosjekt
-                    ProsjektTekstgrensesnitt.lagreProsjekt(prDAO);
+                    ProsjektTekstgrensesnitt.lagreProsjekt(prDAO, anDAO);
                     System.out.println("Ny avdeling lagt til.");
 
                     break;
@@ -69,21 +69,31 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         return DAO.finnProsjektMedId(id);
     }
 
-    public static Prosjekt lagreProsjekt(ProsjektDAOInterface DAO){
+    public static Prosjekt lagreProsjekt(ProsjektDAOInterface prDAO, AnsattDAOInterface anDAO){
 
         String prosjekt;
+        String sjef;
         String beskrivelse;
 
         Scanner input = new Scanner(System.in);
 
         prosjekt = safeRead(() -> {
-            System.out.println("Skriv inn nytt prosjekt navn:");
+            System.out.print("Prosjekt navn:");
             String res = input.nextLine();
-            if(DAO.finnProsjektMedNavn(res) != null){
+            if(prDAO.finnProsjektMedNavn(res) != null){
                 throw new Exception("prosjekt navn er tatt");
             }
             return res;
         }, "Ikke gyldig navn");
+
+        sjef = safeRead(() -> {
+            System.out.print("Sjef: ");
+            String res = input.nextLine();
+            if (anDAO.finnAnsattMedBrukernavn(res) == null) {
+                throw new Exception("finner ingen ansatt med dette brukernanvnet");
+            }
+            return res;
+        }, "Ikke gyldig sjef");
 
         beskrivelse = safeRead(() -> {
             System.out.println("Skriv inn prosjekt beskrivelse");
@@ -92,8 +102,8 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
             return prosjektBeskrivelse;
         }, "Ikke gyldig beskrivelse");
 
-        Prosjekt nyttProsjekt = new Prosjekt(prosjekt,beskrivelse);
-        DAO.lagreProsjekt(nyttProsjekt);
+        Prosjekt nyttProsjekt = new Prosjekt(prosjekt, sjef, beskrivelse);
+        prDAO.lagreProsjekt(nyttProsjekt);
         return nyttProsjekt;
     }
 }

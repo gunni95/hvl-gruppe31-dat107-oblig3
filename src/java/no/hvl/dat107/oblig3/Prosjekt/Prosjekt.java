@@ -11,14 +11,16 @@ public class Prosjekt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String navn;
+    private String sjef;
     private String beskrivelse; // required og burde være en AnsattId
-    private int TotaltTimeantall;
+    private int totaltTimeantall;
 
 
-    public Prosjekt(String ProsjektNavn, String Beskrivelse){
-        this.navn = ProsjektNavn;
-        this.beskrivelse = Beskrivelse;
-        this.TotaltTimeantall = 0;
+    public Prosjekt(String prosjektNavn, String sjef, String beskrivelse){
+        this.navn = prosjektNavn;
+        this.sjef = sjef;
+        this.beskrivelse = beskrivelse;
+        this.totaltTimeantall = 0;
     }
 
     public Prosjekt() {
@@ -31,32 +33,33 @@ public class Prosjekt {
     public String getBeskrivelse() {
         return beskrivelse;
     }
-    public String getNavn() {
-        return navn;
-    }
-    public void setNavn(String navn) {
-        this.navn = navn;
-    }
-    public String getProsjektNavn(){
+    public String getNavn(){
         return this.navn;
     }
-    public void setProsjektNavn(String ProsjektNavn){
+    public void setNavn(String ProsjektNavn){
         this.navn = ProsjektNavn;
     }
-    public String getProsjektSjef(){
+    public String getSjef(){
         return this.beskrivelse;
     }
-    public void setProsjektSjef(String ProsjektSjef){
+    public void setSjef(String ProsjektSjef){
         this.beskrivelse = ProsjektSjef;
     }
     public int getTotaltTimeantall(){
-        return this.TotaltTimeantall;
+        return this.totaltTimeantall;
     }
     public void setTotaltTimeantall(int TotaltTimeantall){
-        this.TotaltTimeantall = TotaltTimeantall;
+        this.totaltTimeantall = TotaltTimeantall;
     }
     public Integer getId() {
         return this.id;
+    }
+    @Override
+    public String toString() {
+        return "Prosjektnavn: " + this.navn + "\n" +
+                "Sjef: " + this.sjef + "\n" +
+                "Beskrivelse: " + this.beskrivelse + "\n" +
+                "Total timer: " + this.totaltTimeantall + "\n";
     }
 
 }

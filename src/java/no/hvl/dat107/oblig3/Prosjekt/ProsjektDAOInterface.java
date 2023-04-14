@@ -24,6 +24,8 @@ public interface ProsjektDAOInterface {
 
         List<Ansatt> getMedlemmer(Integer id);
 
+        String getProsjektInfo(Integer prosjektId);
+
 
         /** Delete - Slette en Prosjekt-rad fra databasen */
         void slettProsjekt(int id);

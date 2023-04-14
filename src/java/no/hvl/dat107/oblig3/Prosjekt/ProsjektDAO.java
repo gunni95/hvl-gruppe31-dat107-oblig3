@@ -84,10 +84,10 @@ public class ProsjektDAO implements ProsjektDAOInterface {
 
             Prosjekt a = em.find(Prosjekt.class, id); //Finne rad som skal oppdateres
             if(nyttProsjektNavn != null) {
-                a.setProsjektNavn(nyttProsjektNavn);
+                a.setNavn(nyttProsjektNavn);
             }
             if(nySjef != null) {
-                a.setProsjektSjef(nySjef);
+                a.setSjef(nySjef);
             }
             if (nyBeskrivelse != null) {
                 a.setBeskrivelse(nyBeskrivelse);
@@ -139,6 +139,11 @@ public class ProsjektDAO implements ProsjektDAOInterface {
         } finally {
             em.close();
         }
+    }
+
+    @Override
+    public String getProsjektInfo(Integer prosjektId) {
+        return this.finnProsjektMedId(prosjektId).toString();
     }
 
     @Override
