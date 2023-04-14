@@ -22,6 +22,7 @@ CREATE TABLE ansatt(
 CREATE TABLE prosjekt(
                          Id SERIAL primary key,
                          Prosjektnavn char(30) NOT NULL,
+                         Sjef char(6) unique,
                          Beskrivelse char(100),
                          Timetall integer
 );

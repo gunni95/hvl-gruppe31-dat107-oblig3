@@ -128,7 +128,7 @@ public class ProsjektDAO implements ProsjektDAOInterface {
 
             Prosjekt a = em.find(Prosjekt.class, id); //Finne rad som skal oppdateres
             if(timer != null) {
-                a.setTotaltTimeantall(timer);
+                a.setTimetall(timer);
             }
 
             tx.commit();

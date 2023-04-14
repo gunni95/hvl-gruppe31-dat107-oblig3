@@ -13,14 +13,14 @@ public class Prosjekt {
     private String prosjektnavn;
     private String sjef;
     private String beskrivelse; // required og burde være en AnsattId
-    private int totaltTimeantall;
+    private int timetall;
 
 
     public Prosjekt(String prosjektNavn, String sjef, String beskrivelse){
         this.prosjektnavn = prosjektNavn;
         this.sjef = sjef;
         this.beskrivelse = beskrivelse;
-        this.totaltTimeantall = 0;
+        this.timetall = 0;
     }
 
     public Prosjekt() {
@@ -45,11 +45,11 @@ public class Prosjekt {
     public void setSjef(String ProsjektSjef){
         this.beskrivelse = ProsjektSjef;
     }
-    public int getTotaltTimeantall(){
-        return this.totaltTimeantall;
+    public int getTimetall(){
+        return this.timetall;
     }
-    public void setTotaltTimeantall(int TotaltTimeantall){
-        this.totaltTimeantall = TotaltTimeantall;
+    public void setTimetall(int TotaltTimeantall){
+        this.timetall = TotaltTimeantall;
     }
     public Integer getId() {
         return this.id;
@@ -59,7 +59,7 @@ public class Prosjekt {
         return "Prosjektnavn: " + this.prosjektnavn + "\n" +
                 "Sjef: " + this.sjef + "\n" +
                 "Beskrivelse: " + this.beskrivelse + "\n" +
-                "Total timer: " + this.totaltTimeantall + "\n";
+                "Total timer: " + this.timetall + "\n";
     }
 
 }
