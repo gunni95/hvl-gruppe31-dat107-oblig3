@@ -130,15 +130,40 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         Scanner input = new Scanner(System.in);
 
         prosjektId = safeRead(() -> {
-            System.out.println("Skriv inn prosjek");
+            System.out.print("Prosjekt: ");
             String res = input.nextLine();
-            return prDAO.finnProsjektMedNavn(res).getId();
+            if (res.matches("^\\d+$")) {
+                Prosjekt funnet = prDAO.finnProsjektMedId(Integer.parseInt(res));
+
+                if (funnet != null) {
+                    return funnet.getId();
+                }
+            }
+
+            Prosjekt funnet = prDAO.finnProsjektMedNavn(res);
+
+            if (funnet == null) {
+                throw new Exception("Ingen prosjekt funnet");
+            }
+            return funnet.getId();
         }, "Ikke gyldig prosjekt");
 
         ansattId = safeRead(() -> {
-            System.out.println("Skriv inn navn på deltaker:");
+            System.out.print("Deltaker: ");
             String res = input.nextLine();
-            return anDAO.finnAnsattMedBrukernavn(res).getId();
+            if (res.matches("^\\d+$")) {
+                Ansatt funnet = anDAO.finnAnsattMedId(Integer.parseInt(res));
+
+                if (funnet != null) {
+                    return funnet.getId();
+                }
+            }
+            Ansatt funnet =  anDAO.finnAnsattMedBrukernavn(res);
+            if (funnet == null) {
+                throw new Exception("Ingen ansatt funnet");
+            }
+
+            return funnet.getId();
         }, "Ikke gyldig navn");
 
         rolle = safeRead(() -> {
