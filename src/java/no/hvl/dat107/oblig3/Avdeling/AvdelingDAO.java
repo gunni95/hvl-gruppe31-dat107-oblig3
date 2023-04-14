@@ -12,7 +12,7 @@ public class AvdelingDAO implements AvdelingDAOInterface {
     }
 
     @Override
-    public void lagreProsjekt(Avdeling a) {
+    public void opprettProsjekt(Avdeling a) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 

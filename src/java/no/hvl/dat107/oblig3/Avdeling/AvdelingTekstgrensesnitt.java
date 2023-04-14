@@ -114,7 +114,7 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
         }, "Ikke gyldig navn");
 
         Avdeling nyAvdeling = new Avdeling(avdeling,sjefsBrukernavn);
-        DAO.lagreProsjekt(nyAvdeling);
+        DAO.opprettProsjekt(nyAvdeling);
 
         String s = nyAvdeling.toString();
         return s;

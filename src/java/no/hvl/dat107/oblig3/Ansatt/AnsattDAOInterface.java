@@ -5,7 +5,7 @@ import java.util.List;
 public interface AnsattDAOInterface {
 	
 	/** Create - Opprette ny ansatt-rad i databasen */
-	void lagreAnsatt(Ansatt a);	
+	void opprettAnsatt(Ansatt a);
 	
 	/** Read1 - Hente ut data fra databasen. En enkelt. */
 	Ansatt finnAnsattMedId(int id);

@@ -15,7 +15,7 @@ public class AnsattDAO implements AnsattDAOInterface {
 	}
 	
 	@Override
-	public void lagreAnsatt(Ansatt a) {
+	public void opprettAnsatt(Ansatt a) {
 		
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();

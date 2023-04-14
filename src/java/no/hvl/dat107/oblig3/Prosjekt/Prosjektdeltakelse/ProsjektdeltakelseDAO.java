@@ -6,7 +6,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import no.hvl.dat107.oblig3.Prosjekt.ProsjektDAO;
 
-public class ProsjektdeltakelseDAO {
+public class ProsjektdeltakelseDAO implements ProsjektdeltakelseDAOInterface {
     private final EntityManagerFactory emf;
     public ProsjektdeltakelseDAO() {
         emf = Persistence.createEntityManagerFactory("oblig3PersistenceUnit");
@@ -17,6 +17,7 @@ public class ProsjektdeltakelseDAO {
                         "SELECT a from Prosjektdeltakelse a WHERE a.prosjektId = :prosjektId AND a.ansattId = :ansattId", Prosjektdeltakelse.class).
                 setParameter("prosjektId", prosjektId).setParameter("ansattId", ansattId).getSingleResult();
     }
+    @Override
     public Prosjektdeltakelse getProsjektdeltakelse(Integer prosjektId, Integer ansattId) {
         EntityManager em = emf.createEntityManager();
 
@@ -26,7 +27,7 @@ public class ProsjektdeltakelseDAO {
 
         return result;
     }
-
+    @Override
     public Prosjektdeltakelse oppdaterProsjektdeltakelseRolle(Integer prosjektId, Integer ansattId, String nyRolle){
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -45,6 +46,26 @@ public class ProsjektdeltakelseDAO {
         }
         return null;
     }
+
+    @Override
+    public void opprettProsjektdeltakelse(Prosjektdeltakelse p) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+            em.persist(p); //Oppretter en ny rad i databasen
+            tx.commit();
+
+        } catch (Throwable e) {
+            e.printStackTrace();
+            tx.rollback();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
     public void leggTilTimer(Integer prosjektId, Integer ansattId, Integer antallTimer){
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();;

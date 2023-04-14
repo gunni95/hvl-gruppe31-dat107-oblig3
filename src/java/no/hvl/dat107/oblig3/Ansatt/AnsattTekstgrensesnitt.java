@@ -1,11 +1,9 @@
 package no.hvl.dat107.oblig3.Ansatt;
-import no.hvl.dat107.oblig3.Avdeling.Avdeling;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface;
 import no.hvl.dat107.oblig3.Teksgrensesnitt;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.Callable;
 
 public class AnsattTekstgrensesnitt extends Teksgrensesnitt {
 
@@ -118,7 +116,7 @@ public class AnsattTekstgrensesnitt extends Teksgrensesnitt {
         }, "Ikke gyldig lønn");
 
         Ansatt nyAnsatt = new Ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, avdeling, stilling, maanedslonn);
-        anDAO.lagreAnsatt(nyAnsatt);
+        anDAO.opprettAnsatt(nyAnsatt);
         return nyAnsatt;
     }
 
