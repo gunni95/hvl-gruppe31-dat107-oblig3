@@ -52,7 +52,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
                     break;
 
                 case "e": // e) Skriv ut prosjekt informasjon
-                    System.out.println(ProsjektTekstgrensesnitt.skrivUtBeskrivelse(prDAO));
+                    System.out.println(ProsjektTekstgrensesnitt.hentProsjektInfo(prDAO));
                     break;
 
             }
@@ -311,18 +311,24 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
 
         prDAO.oppdaterProsjekt(prosjektId, prosjektNavn, nySjef, beskrivelse);
     }
-    public static Prosjekt skrivUtBeskrivelse(ProsjektDAOInterface DAO){
+    public static String hentProsjektInfo(ProsjektDAOInterface DAO){
         Scanner input = new Scanner(System.in);
 
         return safeRead(() -> {
             System.out.println("Skriv inn prosjekt navn:");
             String res = input.nextLine();
+            if (res.matches("^\\d+$")) {
+                Prosjekt funnet = DAO.finnProsjektMedId(Integer.parseInt(res));
+                if (funnet != null) {
+                    return funnet.toString();
+                }
+            }
             Prosjekt funnet = DAO.finnProsjektMedNavn(res);
             if(funnet == null){
                 throw new Exception("prosjekte eksisterer ikke");
             }
 
-            return funnet;
+            return funnet.toString();
         }, "Ikke gyldig navn");
     }
 }
