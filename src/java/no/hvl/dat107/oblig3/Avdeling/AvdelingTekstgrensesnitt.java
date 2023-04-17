@@ -92,14 +92,15 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
         return safeRead(() -> {
             System.out.print("Avdeling id/navn: ");
             String res = input.nextLine();
-            List<Ansatt> ansattList;
-            Avdeling avdeling;
+            List<Ansatt> ansattList = null;
+            Avdeling avdeling = null;
 
             if (res.matches("^\\d+$")) {
-                ;
                 avdeling = DAO.finnAvdelingMedId(Integer.parseInt(res));
                 ansattList = DAO.getAnsatte(Integer.parseInt(res));
-            } else {
+            }
+
+            if (avdeling == null && ansattList == null) {
                 avdeling = DAO.finnAvdelingMedNavn(res);
                 ansattList = DAO.getAnsatte(avdeling.getId());
             }
