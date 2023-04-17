@@ -90,7 +90,7 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
         Scanner input = new Scanner(System.in);
 
         return safeRead(() -> {
-            System.out.print("Avdeling: ");
+            System.out.print("Avdeling id/navn: ");
             String res = input.nextLine();
             List<Ansatt> ansattList;
             Avdeling avdeling;
