@@ -1,23 +1,24 @@
 package no.hvl.dat107.oblig3.Ansatt;
 import no.hvl.dat107.oblig3.Avdeling.AvdelingDAOInterface;
+import no.hvl.dat107.oblig3.Prosjekt.Prosjekt;
 import no.hvl.dat107.oblig3.Teksgrensesnitt;
 
 import java.util.List;
 import java.util.Scanner;
 
+
 public class AnsattTekstgrensesnitt extends Teksgrensesnitt {
 
-    public static void ansattGrensesnitt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO) {
+    public static void ansattGrensesnitt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO) throws Exception {
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
 
         while (!done) {
-            String promptTekst = "Velg operasjon:" +
-                    " a) Søk ansatt med id\n " +
-                    " b) Søk ansatt med brukernavn\n " +
-                    " c) Liste med ansatte\n " +
-                    " d) Oppdatere ansatt\n " +
-                    " e) Legg til ny ansatt\n " +
+            String promptTekst = "Velg operasjon:\n " +
+                    " a) Søk etter ansatt med id eller brukernavn\n " +
+                    " b) Liste med ansatte\n " +
+                    " c) Oppdatere ansatt\n " +
+                    " d) Legg til ny ansatt\n " +
                     " 0) Tilbake";
 
             System.out.println(promptTekst);
@@ -28,19 +29,16 @@ public class AnsattTekstgrensesnitt extends Teksgrensesnitt {
                 case "0": // 0) Tilbake
                     done = true;
                     break;
-                case "a": // a) Søk ansatt med id
-                    System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsattMedId(anDAO));
+                case "a": // a) Søk ansatt med id eller brukernavn
+                    System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsatMedIdEllerBrukernavn(anDAO));
                     break;
-                case "b": // b) Søk ansatt med brukernavn
-                    System.out.println("Funnet: " + AnsattTekstgrensesnitt.finnAnsattMedBrukernavn(anDAO));
-                    break;
-                case "c": // c) Liste med ansatt
+                case "b": // c) Liste med ansatt
                     System.out.println("Alle ansatte: " + AnsattTekstgrensesnitt.listAnsatte(anDAO));
                     break;
-                case "d": // d) Oppdatere ansatt
+                case "c": // d) Oppdatere ansatt
                     System.out.println("Oppdatert ansatt: " + AnsattTekstgrensesnitt.oppdaterAnsatt(avDAO, anDAO));
                     break;
-                case "e": // e) Legg til ny ansatt
+                case "d": // e) Legg til ny ansatt
                     System.out.println("Ny ansatt: " + AnsattTekstgrensesnitt.LesInnNyAnsatt(avDAO, anDAO));
                     break;
             }
@@ -197,6 +195,27 @@ public class AnsattTekstgrensesnitt extends Teksgrensesnitt {
 
         return DAO.finnAnsattMedId(brukerId);
     }
+    public static Ansatt finnAnsatMedIdEllerBrukernavn(AnsattDAOInterface DAO) throws Exception {
+        Scanner input = new Scanner(System.in);
+
+        Ansatt bruker = safeRead(() -> {
+            System.out.print("Skriv inn id eller brukernavn: ");
+            String res = input.nextLine();
+            if (res.matches("^\\d+$")) {
+                Ansatt funnet = DAO.finnAnsattMedId(Integer.parseInt(res));
+                if (funnet != null) {
+                   return funnet;
+                }
+            }
+            Ansatt funnet = DAO.finnAnsattMedBrukernavn(res);
+            if (funnet == null) {
+                throw new Exception("ansatt eksisterer ikke");
+            }
+            return funnet;
+        },"Ikke gyldig prosjekt");
+        return bruker;
+    }
+
 
     public static List<Ansatt> listAnsatte(AnsattDAOInterface DAO) {
         return DAO.hentAlleAnsatte();

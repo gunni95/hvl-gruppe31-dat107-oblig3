@@ -36,4 +36,5 @@ public interface AnsattDAOInterface {
 	
 	/** Delete - Slette en ansatt-rad fra databasen */
 	void slettAnsatt(int id);
+
 }

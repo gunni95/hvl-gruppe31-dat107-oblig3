@@ -262,7 +262,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         Scanner input = new Scanner(System.in);
 
         prosjektId = safeRead(() -> {
-            System.out.print("Prosjekt til redigering: ");
+            System.out.print("Prosjekt navn eller id til redigering: ");
             String res = input.nextLine();
             if (res.matches("^\\d+$")) {
                 Prosjekt funnet = prDAO.finnProsjektMedId(Integer.parseInt(res));
@@ -323,7 +323,7 @@ public class ProsjektTekstgrensesnitt extends Teksgrensesnitt {
         Scanner input = new Scanner(System.in);
 
         return safeRead(() -> {
-            System.out.println("Skriv inn prosjekt navn:");
+            System.out.println("Skriv inn prosjekt navn eller id:");
             String res = input.nextLine();
             if (res.matches("^\\d+$")) {
                 Prosjekt funnet = DAO.finnProsjektMedId(Integer.parseInt(res));

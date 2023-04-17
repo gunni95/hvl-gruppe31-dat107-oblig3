@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 
 public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
 
-    public static void avdelingGrensesnitt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO) {
+    public static void avdelingGrensesnitt(AvdelingDAOInterface avDAO, AnsattDAOInterface anDAO) throws Exception {
         Scanner scanner = new Scanner(System.in);
         boolean done = false;
 
         while (!done) {
-            String promptTekst = "Velg operasjon:" +
-                    " a) Finn avdeling\n" +
-                    " b) Hent ansatt i avdeling\n" +
+            String promptTekst = "Velg operasjon: \n" +
+                    " a) Finn avdeling med id eller navn\n" +
+                    " b) Hent alle ansatte i avdeling\n" +
                     " c) Legg til ny avdeling\n" +
                     " 0) Tilbake";
 
@@ -30,8 +30,8 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
                 case "0": // 0) Tilbake
                     done = true;
                     break;
-                case "a": // a) Finn avdeling
-                    System.out.println("Avdeling: " + AvdelingTekstgrensesnitt.finnAvdelingMedId(avDAO));
+                case "a": // a) Finn avdeling med id eller navn
+                    System.out.println("Avdeling: " + AvdelingTekstgrensesnitt.finnAvdelingMedIdEllerNavn(avDAO));
                     break;
                 case "b": // b) Hent ansatt i avdeling
                     System.out.println(AvdelingTekstgrensesnitt.hentAnsatteIAvdeling(avDAO));
@@ -64,6 +64,26 @@ public class AvdelingTekstgrensesnitt extends Teksgrensesnitt {
         }, "Ikke gyldig søkeverdi");
 
         return DAO.finnAvdelingMedId(id);
+    }
+    public static Avdeling finnAvdelingMedIdEllerNavn(AvdelingDAOInterface DAO) throws Exception {
+        Scanner input = new Scanner(System.in);
+
+        Avdeling avdeling = safeRead(() -> {
+            System.out.print("Skriv inn id eller navn: ");
+            String res = input.nextLine();
+            if (res.matches("^\\d+$")) {
+                Avdeling funnet = DAO.finnAvdelingMedId(Integer.parseInt(res));
+                if (funnet != null) {
+                    return funnet;
+                }
+            }
+            Avdeling funnet = DAO.finnAvdelingMedNavn(res);
+            if (funnet == null) {
+                throw new Exception("avdeling eksisterer ikke");
+            }
+            return funnet;
+        },"Ikke gyldig avdeling");
+        return avdeling;
     }
 
     public static String hentAnsatteIAvdeling(AvdelingDAOInterface DAO) {

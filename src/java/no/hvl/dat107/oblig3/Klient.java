@@ -18,7 +18,7 @@ public class Klient {
 	private static final ProsjektDAO prDAO = new ProsjektDAO();
 	private static final ProsjektdeltakelseDAO pdDAO = new ProsjektdeltakelseDAO();
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		boolean done = false;
 		Scanner input = new Scanner(System.in);
 
