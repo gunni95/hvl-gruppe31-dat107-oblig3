@@ -48,7 +48,7 @@ public class AvdelingDAO implements AvdelingDAOInterface {
 
         try {
             return em.createQuery(
-                            "SELECT a from Prosjekt a WHERE a.prosjektnavn = :avdelingNavn", Avdeling.class).
+                            "SELECT a from Avdeling a WHERE a.navn = :avdelingNavn", Avdeling.class).
                     setParameter("avdelingNavn", avdelingNavn).getSingleResult(); //Henter ut på primærnøkkel
         } catch (NoResultException e){
             return null;
